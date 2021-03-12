@@ -9,12 +9,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import Home from './components/Home';
+import PageEvents from './components/Events';
+import PageRestaurants from './components/Restaurants';
 
 import AppMenu from './AppMenu'
 
-const Home = () => <Typography variant="h3" component="h3">Home</Typography>
-const PageRestaurants = () => <Typography variant="h3" component="h3">Restaurants Page</Typography>
-const PageEvents = () => <Typography variant="h3" component="h3">Events Page</Typography>
+//const Home = () => <Typography variant="h3" component="h3">Home</Typography>
+//const PageRestaurants = () => <Typography variant="h3" component="h3">Restaurants Page</Typography>
+//const PageEvents = () => <Typography variant="h3" component="h3">Events Page</Typography>
 
 function ResponsiveDrawer(props) {
   const { window } = props;
@@ -78,11 +81,11 @@ function ResponsiveDrawer(props) {
         <main className={classes.content}>
           <Container maxWidth="lg" className={classes.container}>
               <Switch>
-                  <Route path="/" exact component={Home} />
-                  <Route path="/restaurants" component={PageRestaurants} />
-                  <Route path="/events" component={PageEvents} />
-                </Switch>
-            </Container>
+                <Route path="/" exact component={Home} />
+                <Route path="/restaurants" component={PageRestaurants} />
+                <Route path="/events" component={PageEvents} />
+              </Switch>
+          </Container>
         </main>
       </div>
     </BrowserRouter>
