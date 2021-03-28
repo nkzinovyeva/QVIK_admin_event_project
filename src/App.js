@@ -6,7 +6,6 @@ import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Home from './components/Home';
@@ -14,10 +13,6 @@ import PageEvents from './components/Events';
 import PageRestaurants from './components/Restaurants';
 
 import AppMenu from './AppMenu'
-
-//const Home = () => <Typography variant="h3" component="h3">Home</Typography>
-//const PageRestaurants = () => <Typography variant="h3" component="h3">Restaurants Page</Typography>
-//const PageEvents = () => <Typography variant="h3" component="h3">Events Page</Typography>
 
 function ResponsiveDrawer(props) {
   const { window } = props;
@@ -36,7 +31,7 @@ function ResponsiveDrawer(props) {
     <BrowserRouter>
       <div className={classes.root}>
         <CssBaseline />
-          <Toolbar>
+          <Toolbar  className={classes.toolbar}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -47,7 +42,7 @@ function ResponsiveDrawer(props) {
               <MenuIcon />
             </IconButton>
           </Toolbar>
-        <nav className={classes.drawer} aria-label="mailbox folders">
+        <nav className={classes.drawer} >
           {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
           <Hidden smUp implementation="css">
             <Drawer
@@ -110,9 +105,13 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    alignItems: "flex-start",
+    backgroundColor: "#EEEEEE",
+    width: drawerWidth/4
+  },
   drawerPaper: {
-    width: drawerWidth,
+    width: drawerWidth
   },
   content: {
     flexGrow: 1,
