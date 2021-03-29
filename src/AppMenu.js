@@ -18,10 +18,10 @@ const appMenuItems = [
           name: 'Restaurant 1',
         },
         {
-            name: 'Restaurant 2',
+          name: 'Restaurant 2',
         },
         {
-            name: 'Restaurant 3',
+          name: 'Restaurant 3',
         },
     ]
   },
@@ -33,10 +33,10 @@ const appMenuItems = [
           name: 'Event 1',
         },
         {
-            name: 'Event 2',
+          name: 'Event 2',
         },
         {
-            name: 'Event 3',
+          name: 'Event 3',
         },
     ]
   },
