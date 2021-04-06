@@ -29,60 +29,61 @@ function ResponsiveDrawer(props) {
 
   return (
     <BrowserRouter>
-      <div className={classes.root}>
-        <CssBaseline />
-          <Toolbar  className={classes.toolbar}>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Toolbar>
-        <nav className={classes.drawer} >
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation="css">
-            <Drawer
-              container={container}
-              variant="temporary"
-              anchor={theme.direction === "rtl" ? "right" : "left"}
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              ModalProps={{
-                keepMounted: true // Better open performance on mobile.
-              }}
-            >
-              <AppMenu />
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              variant="permanent"
-              open
-            >
-              <AppMenu />
-            </Drawer>
-          </Hidden>
-        </nav>
-        <main className={classes.content}>
-          <Container maxWidth="lg" className={classes.container}>
-              <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/restaurants" component={PageRestaurants} />
-                <Route path="/events" component={PageEvents} />
-              </Switch>
-          </Container>
-        </main>
-      </div>
+     
+        <div className={classes.root}>
+          <CssBaseline />
+            <Toolbar  className={classes.toolbar}>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                className={classes.menuButton}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Toolbar>
+          <nav className={classes.drawer} >
+            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+            <Hidden smUp implementation="css">
+              <Drawer
+                container={container}
+                variant="temporary"
+                anchor={theme.direction === "rtl" ? "right" : "left"}
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                classes={{
+                  paper: classes.drawerPaper
+                }}
+                ModalProps={{
+                  keepMounted: true // Better open performance on mobile.
+                }}
+              >
+                <AppMenu />
+              </Drawer>
+            </Hidden>
+            <Hidden xsDown implementation="css">
+              <Drawer
+                classes={{
+                  paper: classes.drawerPaper
+                }}
+                variant="permanent"
+                open
+              >
+                <AppMenu />
+              </Drawer>
+            </Hidden>
+          </nav>
+          <main className={classes.content}>
+            <Container maxWidth="lg" className={classes.container}>
+                <Switch>
+                  <Route path="/" exact component={Home} />
+                  <Route path="/restaurants" component={PageRestaurants} />
+                  <Route path="/events" component={PageEvents} />
+                </Switch>
+            </Container>
+          </main>
+        </div>
     </BrowserRouter>
   );
 }
