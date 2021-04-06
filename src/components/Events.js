@@ -1,79 +1,73 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
+import React, { useState, useEffect, useRef } from "react";
+import FormControl from '@material-ui/core/FormControl';
+
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
+import { AgGridReact } from "ag-grid-react";
+import "ag-grid-community/dist/styles/ag-grid.css";
+import "ag-grid-community/dist/styles/ag-theme-material.css";
 
-export function Events() {
-  /////
-  const [data, setData] = useState([])
-  const url = "https://qvik.herokuapp.com/api/v1/events";
 
-  useEffect(() => {
-    //const fetchData = async () => {
-      //getEventsData();
-      getAllEvents();
-    //} 
-    //fetchData()
-  }, []) 
+function Events() {
 
-  const getAllEvents = () => {
-      axios.get(`${url}`)
-      .then((response) => {
-        const allEvents = response.data.data;
-        setData(allEvents);
-        console.log(allEvents);
-        console.log("fin allEvents --------");
-        console.log(response);
-      })
-      .catch(error => console.error(`Error: ${error}`));
-  }
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-    },
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: '30ch',
-    },
-  }));
-  /*const getEventsData = () => {
-      fetch('https://qvik.herokuapp.com/api/v1/events')
-      .then(response => response.json())
-      .then(data => {
-          return setData(
-              data.map((data,index) => ({
-                  id:index,
-                  eventName: data.title,
-                  location: data.stage.name
-              }))
-          )
-          })
-      .catch(err => console.error(err))
-    }  
-    */
+  const [events, setEvents] = useState([]);
+  const gridRef = useRef();
 
-    //////////////
-    const classes = useStyles();
+    useEffect(() => {
+        getEvents();
+        //console.log('event', events[0].data)
+    }, []);
+    
+    useEffect(() => {
+      console.log(events);
+    }, [events])
+    //set columns for the table
+    const columns = [
+        {headerName: "Id", field: "eventId", sortable: true, filter: true, resizable: true },
+        {headerName: "Title", field: "title", sortable: true, filter: true, resizable: true },
+        {headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
+    ];
+    
+    //get customers from the database
+    const getEvents = () => {
+        fetch("https://qvik.herokuapp.com/api/v1/events")
+            .then(response => response.json())
+            .then(data => setEvents(data.data))
+            .catch(err => console.error(err));
+    };
+
       return(
         <div style={{marginLeft: '150px'}}>
           <h1>Events page</h1>
-          <form noValidate autoComplete="off">
-            <div className={classes.textField} >
-              <TextField id="filled-basic" label="Event Name" defaultValue="Wall of paint" variant="filled" margin="normal"/>
-              <TextField id="filled-basic" label="Street Address" defaultValue="Main road 2" variant="filled" margin="normal"/>
-            </div>
-            <div className={classes.root}>
-              <TextField id="filled-basic" label="City" defaultValue="Helsinki" variant="filled" />
-              <TextField id="filled-basic" label="Zip Code" defaultValue="00420" variant="filled" />
-            </div>
-          </form>  
+          <h2>{events[0].data.title}</h2>
         </div>
         
       );
     }
 
 export default Events;
+
+/*
+<form noValidate autoComplete="off">
+            <div>
+              <TextField helperText="Event name" id="standard-basic" label="Nights of Arts" />
+            </div>
+            <div>
+              <TextField helperText="Location" id="standard-basic" label="Helsinki" />
+            </div>
+            <div style ={{height: "700px", width: "95%", margin: "auto"}}>
+                <AgGridReact 
+                    ref = {gridRef}
+                    onGridReady = { params => {
+                        gridRef.current = params.api;
+                        params.api.sizeColumnsToFit();
+                    }}
+                    columnDefs = {columns}
+                    suppressCellSelection = {true}
+                    rowData = {events[0].data}
+                    pagination = {true}
+                    paginationPageSize = {10}
+                >
+                </AgGridReact>
+            </div>
+          </form>
+          */
