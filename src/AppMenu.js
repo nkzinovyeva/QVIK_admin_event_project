@@ -1,5 +1,4 @@
-import React from 'react'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
+import React, {useEffect, useState} from "react";import { makeStyles, createStyles } from '@material-ui/core/styles'
 
 import List from '@material-ui/core/List'
 
@@ -28,7 +27,7 @@ const appMenuItems = [
   {
     name: 'Events',
     link: '/events',
-    items: [
+    items: [ //HERE WE NEED TO WRITE A FUNCTION WHERE EACH NAME = EVENTS.TITLE
         {
           name: 'Event 1',
         },
@@ -44,6 +43,21 @@ const appMenuItems = [
 
 const AppMenu = () => {
   const classes = useStyles()
+  const [events, setEvents] = useState([]);
+  
+    useEffect(() => {
+        getEvents(); 
+    }, []);
+    
+    const getEvents = () => {
+        fetch("https://qvik.herokuapp.com/api/v1/events")
+          .then((response) => response.json())
+          .then((jsondata) => { 
+            console.log('jsondata', jsondata.data[0].data )
+            setEvents(jsondata.data[0].data);
+          })
+            .catch(err => console.error(err));
+    };
 
   return (
         <List component="nav" className={classes.appMenu} disablePadding>
