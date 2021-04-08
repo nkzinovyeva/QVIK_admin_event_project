@@ -3,24 +3,10 @@ import {Events} from './Events'
 
 function Home() {
 
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-      getEvents();
-      console.log(events);
-    }, []);
-
-  const getEvents = () => {
-    fetch('https://qvik.herokuapp.com/api/v1/events')
-    .then(response => response.json())
-    .then(data => setEvents(data.data))
-    .catch(err => console.error(err))
-
-}
   return (
         <div style={{marginLeft: '150px'}}>
            <h1>Home page</h1>
-           <h2>{events.data}</h2>
+           <p>Welcome to the admin Panel, you can open and edits event from the list in the menu.</p>
         </div>
         
       );
