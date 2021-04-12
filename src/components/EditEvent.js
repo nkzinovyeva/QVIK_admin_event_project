@@ -8,7 +8,7 @@ import EditIcon from "@material-ui/icons/Edit";
 */
 function EditEvent (props) {
 
-    console.log('props', props)
+console.log('props', props)
   
   //set constants
   const [open, setOpen] = React.useState(false);

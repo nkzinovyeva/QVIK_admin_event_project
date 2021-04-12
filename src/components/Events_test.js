@@ -52,11 +52,11 @@ function Events() {
 
     //update event
     const updateEvent = (event, id) => {
-        console.log('stingify', JSON.stringify(event))
+        console.log('stingify', JSON.safeStringify(event))
         fetch("https://qvik.herokuapp.com/api/v1/events/"+ id, {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(event)
+            body: JSON.safeStringify(event)
         })
         .then(_ => getEvents())
         .then(_ => {
@@ -66,7 +66,21 @@ function Events() {
           .catch((err) => console.log(err));
     };
 
-    
+    JSON.safeStringify = (obj, indent = 2) => {
+        let cache = [];
+        const retVal = JSON.stringify(
+          obj,
+          (key, value) =>
+            typeof value === "object" && value !== null
+              ? cache.includes(value)
+                ? undefined // Duplicate reference found, discard key
+                : cache.push(value) && value // Store value in our collection
+              : value,
+          indent
+        );
+        cache = null;
+        return retVal;
+      };
 
     //return  events ? <Event preloadedValues={events}/> : <div>Loading...</div>
     return (
