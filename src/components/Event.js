@@ -18,7 +18,7 @@ export function Event({preloadedValues, tagsList}) {
   };
 
   return (
-    <div style={{marginLeft: '150px'}}>
+    <div> 
         <form onSubmit={handleSubmit(onSubmit)}>
             <h3>Event</h3>
             <input

@@ -58,10 +58,10 @@ console.log('props', props)
         <Tooltip title="Edit event">
             <IconButton variant="text" 
                         color="primary" 
-                        size="medium" 
+                        size="small" 
                         aria-label="edit" 
                         onClick={handleClickOpen} >
-                <EditIcon />
+                EDIT
             </IconButton> 
         </Tooltip>
         <Dialog 
