@@ -1,13 +1,16 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
 
-export function Event({preloadedValues}) {
+export function Event({preloadedValues, tagsList}) {
   const { register, handleSubmit } = useForm({
-    defaultValues: preloadedValues[0]
+    defaultValues: preloadedValues
   });
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
         console.log('values', preloadedValues)
+        console.log('tagslist', tagsList)
+        setTags(tagsList);
     }, []);
 
   const onSubmit = (events) => {
@@ -45,14 +48,21 @@ export function Event({preloadedValues}) {
             name="startTime"
             />
             <br></br>
-            <h3>Stage</h3>
-            <input
-            ref={register}
-            placeholder="stage"
-            type="text"
-            name="stage.name"
-            />
+            <h3>Tags</h3>
+            {
+            tags.map((tag) => (
+                <li key={tag.tagId}>
+                  {tag.name}
+                </li>
+                
+              ))}
+              
+            
         </form>
     </div>
   );
 }
+
+/*
+
+              */
