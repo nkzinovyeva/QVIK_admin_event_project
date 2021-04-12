@@ -49,8 +49,8 @@ console.log('props', props)
     handleClose();
   };
 
-  const handleInputChange = (event) => {
-    setEvent({...event, [event.target.name]: event.target.value})
+  const handleInputChange = (e) => {
+    setEvent({...event, [e.target.name]: e.target.value})
   };
   
   return (
