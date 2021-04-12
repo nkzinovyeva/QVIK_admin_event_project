@@ -1,7 +1,6 @@
 import React from "react";
 import {Button, TextField, Dialog, DialogActions, DialogContent, Tooltip, 
   DialogContentText, DialogTitle, IconButton}  from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
 
 /*
 * edit event modal
