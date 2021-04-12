@@ -7,6 +7,7 @@ import {Event} from './Event'
 function Events() {
 
   const [events, setEvents] = useState([]);
+  const [tags, setTags] = useState([]);
   const gridRef = useRef();  
 
     /*useEffect(() => {
@@ -17,7 +18,9 @@ function Events() {
 
     useEffect(() => {
       const fetchData = async () => {
+        setTags(await getTags())
         setEvents(await getEvents())
+        
       } 
       fetchData()
     }, []) 
@@ -31,42 +34,27 @@ function Events() {
     
     //get customers from the database
     const getEvents = () => {
-        fetch("https://qvik.herokuapp.com/api/v1/events")
+        fetch("https://qvik.herokuapp.com/api/v1/initial-setup")
           .then((response) => response.json())
           .then((jsondata) => { 
-            console.log('jsondata', jsondata.data[0].data )
-            setEvents(jsondata.data[0].data);
+            setEvents(jsondata.data);
           })
             .catch(err => console.error(err));
     };
 
+    const getTags = () => {
+      fetch("https://qvik.herokuapp.com/api/v1/tags")
+        .then((response) => response.json())
+        .then((jsondata) => { 
+          console.log('jsontags', jsondata.data )
+          setTags(jsondata.data);
+        })
+          .catch(err => console.error(err));
+  };
+
     
 
-    return  events ? <Event preloadedValues={events}/> : <div>Loading...</div>
-    /*(
-      <div style={{marginLeft: '150px'}}>
-        <h1>Events page</h1>
-        <div style ={{height: "700px", width: "95%", margin: "auto"}}>
-              <AgGridReact 
-                  ref = {gridRef}
-                  onGridReady = { params => {
-                      gridRef.current = params.api;
-                      params.api.sizeColumnsToFit();
-                  }}
-                  columnDefs = {columns}
-                  suppressCellSelection = {true}
-                  rowData = {events}
-                  pagination = {true}
-                  paginationPageSize = {10}
-              >
-              </AgGridReact>
-          </div>
-          <div>
-          
-          </div>
-      </div>
-      
-    );*/
+    return  events ? <Event preloadedValues={events} tagsList={tags}/> : <div>Loading...</div>
     }
 
 export default Events;
