@@ -51,8 +51,9 @@ function Events() {
     };
 
     //update event
-    const updateEvent = (event, link) => {
-        fetch(link + "/"+ event.eventId, {
+    const updateEvent = (event, id) => {
+        console.log('stingify', JSON.stringify(event))
+        fetch("https://qvik.herokuapp.com/api/v1/events/"+ id, {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(event)
