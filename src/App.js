@@ -9,7 +9,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Home from './components/Home';
-import PageEvents from './components/Events';
+import PageEvents from './components/Events_test';
 import PageRestaurants from './components/Restaurants';
 
 import AppMenu from './AppMenu'
