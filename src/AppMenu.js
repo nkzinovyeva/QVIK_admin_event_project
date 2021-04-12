@@ -7,6 +7,7 @@ import AppMenuItem from './AppMenuItem'
 const AppMenu = () => {
   const classes = useStyles()
   const [events, setEvents] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
 
   const appMenuItems = [
     {
@@ -16,17 +17,9 @@ const AppMenu = () => {
     {
       name: 'Restaurants',
       link: '/restaurants',
-      items: [
-        {
-          name: 'Restaurant 1',
-        },
-        {
-          name: 'Restaurant 2',
-        },
-        {
-          name: 'Restaurant 3',
-        },
-      ]
+      items: restaurants.map(restaurant => {
+        return { name: restaurant.name }
+      })
     },
     {
       name: 'Events',
@@ -39,6 +32,7 @@ const AppMenu = () => {
 
   useEffect(() => {
     getEvents();
+    getRestaurants();
   }, []);
 
   const getEvents = () => {
@@ -47,6 +41,16 @@ const AppMenu = () => {
       .then((jsondata) => {
         console.log('jsondata', jsondata.data[0].data)
         setEvents(jsondata.data[0].data);
+      })
+      .catch(err => console.error(err));
+  };
+
+  const getRestaurants = () => {
+    fetch("https://qvik.herokuapp.com/api/v1/restaurants")
+      .then((response) => response.json())
+      .then((jsondata) => {
+        console.log('jsondata', jsondata.data.restaurants)
+        setRestaurants(jsondata.data.restaurants);
       })
       .catch(err => console.error(err));
   };
