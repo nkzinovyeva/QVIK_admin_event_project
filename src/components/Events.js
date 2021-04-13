@@ -4,6 +4,7 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
 import {Event} from './Event';
 import EditEvent from "./EditEvent";
+import AddEvent from "./AddEvent";
 
 
 function Events() {
@@ -36,7 +37,7 @@ function Events() {
       {headerName: "", 
           field: "", 
           cellRendererFramework: params => <EditEvent updateEvent={updateEvent} event={params.data}/>
-      }  
+      } 
   ];
 
   //get events from the database
@@ -65,6 +66,22 @@ function Events() {
       })
         .catch((err) => console.log(err));
   };
+
+  //create event
+  const createEvent = (event) => {
+    fetch("https://qvik.herokuapp.com/api/v1/events/", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.safeStringify(event)
+    })
+    .then(_ => getEvents())
+    .then(_ => {
+        setMsg("New Subevent added");
+        setOpen(true);
+    })
+      .catch((err) => console.log(err));
+};
+
 
   JSON.safeStringify = (obj, indent = 2) => {
       let cache = [];
@@ -109,6 +126,7 @@ function Events() {
       <div style={{marginLeft: '150px'}}>
         <Event preloadedValues={mainEvent} tagsList={tags}/>
         <h3>Sub-events</h3>
+        <AddEvent createEvent = {createEvent}/>
           <div style ={{height: "700px", width: "95%", margin: "auto"}}>
                 <AgGridReact 
                     ref = {gridRef}

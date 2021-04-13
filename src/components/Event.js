@@ -62,7 +62,3 @@ export function Event({preloadedValues, tagsList}) {
     </div>
   );
 }
-
-/*
-
-              */
