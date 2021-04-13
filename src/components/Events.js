@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
+import { Tooltip, IconButton} from "@material-ui/core";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
 import {Event} from './Event';
@@ -26,9 +27,6 @@ function Events() {
     fetchData()
   }, []) 
 
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   //set columns for the table
   const columns = [
@@ -37,10 +35,43 @@ function Events() {
       {headerName: "", 
           field: "", 
           cellRendererFramework: params => <EditEvent updateEvent={updateEvent} event={params.data} /> 
-      }
+      },
+      {headerName: "", 
+            field: "eventId", 
+            cellRendererFramework: params => <Tooltip title="Delete sub-event">
+                                                <IconButton variant="text" 
+                                                        color="secondary" 
+                                                        size="small" 
+                                                        aria-label="delete"
+                                                        onClick = {() => deleteEvent(params.data.eventId)} >
+                                                        DELETE
+                                                </IconButton>
+                                            </Tooltip>
+        },
   ];
 
-  //get events from the database
+  //get mainEvent from the database
+  const getMainEvent = () => {
+    fetch("https://qvik.herokuapp.com/api/v1/initial-setup")
+      .then((response) => response.json())
+      .then((jsondata) => { 
+        setMainEvent(jsondata.data);
+      })
+        .catch(err => console.error(err));
+  };
+
+  //get list of tags
+  const getTags = () => {
+    fetch("https://qvik.herokuapp.com/api/v1/tags")
+      .then((response) => response.json())
+      .then((jsondata) => { 
+        console.log('jsontags', jsondata.data )
+        setTags(jsondata.data);
+      })
+        .catch(err => console.error(err));
+  };
+
+  //get Sub-events from the database
   const getEvents = () => {
       fetch(link)
         .then((response) => response.json())
@@ -51,10 +82,11 @@ function Events() {
           .catch(err => console.error(err));
   };
 
+
   //update event
   const updateEvent = (event, id) => {
       console.log('stingify', JSON.safeStringify(event))
-      fetch("https://qvik.herokuapp.com/api/v1/events/"+ id, {
+      fetch("https://qvik.herokuapp.com/api/v1/events/" + id, {
           method: "PUT",
           headers: {"Content-Type": "application/json"},
           body: JSON.safeStringify(event)
@@ -76,13 +108,30 @@ function Events() {
     })
     .then(_ => getEvents())
     .then(_ => {
-        setMsg("New Subevent added");
+        setMsg("New Sub-event added");
         setOpen(true);
     })
       .catch((err) => console.log(err));
 };
 
 
+  //delete event
+  const deleteEvent = (id) => {
+    console.log('id', id)
+    if (window.confirm("Are you sure?")) {
+        fetch("https://qvik.herokuapp.com/api/v1/events/" + id, {
+          method: "DELETE"
+        })
+        .then(_ => getEvents())
+        .then(_ => {
+            setMsg("Sub-event deleted")
+            setOpen(true)
+        })
+        .catch(err => console.error(err));
+      }
+  };
+
+  //method for safe Stringify JSON
   JSON.safeStringify = (obj, indent = 2) => {
       let cache = [];
       const retVal = JSON.stringify(
@@ -99,27 +148,6 @@ function Events() {
       return retVal;
     };
 
-    //get mainEvent from the database
-    const getMainEvent = () => {
-        fetch("https://qvik.herokuapp.com/api/v1/initial-setup")
-          .then((response) => response.json())
-          .then((jsondata) => { 
-            setMainEvent(jsondata.data);
-          })
-            .catch(err => console.error(err));
-    };
-
-    const getTags = () => {
-      fetch("https://qvik.herokuapp.com/api/v1/tags")
-        .then((response) => response.json())
-        .then((jsondata) => { 
-          console.log('jsontags', jsondata.data )
-          setTags(jsondata.data);
-        })
-          .catch(err => console.error(err));
-  };
-
-    
 
     return  (
       mainEvent ? 

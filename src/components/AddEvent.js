@@ -21,6 +21,7 @@ function AddEvent(props) {
     shortDescription: "",
     fullDescription: ""
   });
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -29,8 +30,8 @@ function AddEvent(props) {
     setOpen(false);
 	};
 
-	const handleInputChange = event => {
-    setSubevent({ ...subevent, [event.target.name]: event.target.value });
+	const handleInputChange = e => {
+    setSubevent({ ...subevent, [e.target.name]: e.target.value });
   };
     
   const handleSave = () => {
