@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Button, TextField, Dialog, DialogActions, DialogContent, Tooltip, 
   DialogContentText, DialogTitle, IconButton}  from "@material-ui/core";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import AddIcon from '@material-ui/icons/Add';
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
 
@@ -46,7 +46,7 @@ function AddEvent(props) {
                         size="small" 
                         aria-label="Add a new subevent" 
                         onClick={handleClickOpen} > Add subevent
-                <PersonAddIcon />  
+                <AddIcon />  
             </IconButton> 
         </Tooltip>
       <Dialog 
@@ -66,6 +66,7 @@ function AddEvent(props) {
                 onChange = {handleInputChange}
                 margin="dense"
                 label="Start Date"
+                type="date"
                 fullWidth
             />
             <TextField
@@ -74,6 +75,7 @@ function AddEvent(props) {
                 onChange = {handleInputChange}
                 margin="dense"
                 label="Start Time"
+                type="time"
                 fullWidth
             />
             <TextField
@@ -82,6 +84,7 @@ function AddEvent(props) {
                 onChange = {handleInputChange}
                 margin="dense"
                 label="End Date"
+                type="date"
                 fullWidth
             />
             <TextField
@@ -90,6 +93,7 @@ function AddEvent(props) {
                 onChange = {handleInputChange}
                 margin="dense"
                 label="End Time"
+                type="time"
                 fullWidth
             />
             <TextField

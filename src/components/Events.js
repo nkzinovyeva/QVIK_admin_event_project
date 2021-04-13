@@ -36,8 +36,8 @@ function Events() {
       {headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
       {headerName: "", 
           field: "", 
-          cellRendererFramework: params => <EditEvent updateEvent={updateEvent} event={params.data}/>
-      } 
+          cellRendererFramework: params => <EditEvent updateEvent={updateEvent} event={params.data} /> 
+      }
   ];
 
   //get events from the database
