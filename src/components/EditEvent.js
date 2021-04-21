@@ -60,7 +60,7 @@ console.log('props', props)
                         size="small" 
                         aria-label="edit" 
                         onClick={handleClickOpen} >
-                EDIT
+                Edit
             </IconButton> 
         </Tooltip>
         <Dialog 

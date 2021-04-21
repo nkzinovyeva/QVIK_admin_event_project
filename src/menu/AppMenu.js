@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from "react"; import { makeStyles, createStyles } from '@material-ui/core/styles'
+import React, { useEffect, useState } from "react"; 
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { useDispatch, connect } from "react-redux";
+import { fetchAllEvents } from "../redux/actions";
+import List from '@material-ui/core/List';
+import AppMenuItem from './AppMenuItem';
 
-import List from '@material-ui/core/List'
-
-import AppMenuItem from './AppMenuItem'
-
-const AppMenu = () => {
+const AppMenu = (props) => {
   const classes = useStyles()
-  const [events, setEvents] = useState([]);
+  //const [events, setEvents] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllEvents());
+  }, [dispatch]);
 
   const appMenuItems = [
     {
@@ -18,24 +25,24 @@ const AppMenu = () => {
       name: 'Restaurants',
       link: '/restaurants',
       items: restaurants.map(restaurant => {
-        return { name: restaurant.name }
+        return { name: restaurant.name, type: 'rest' }
       })
     },
     {
       name: 'Events',
       link: '/events',
-      items: events.map(event => {
-        return { name: event.title }
+      items: props.events.map(event => {
+        return { name: event.title, type: 'event', data: event }
       })
     },
   ]
 
   useEffect(() => {
-    getEvents();
+    //getEvents();
     getRestaurants();
   }, []);
 
-  const getEvents = () => {
+ /* const getEvents = () => {
     fetch("https://qvik.herokuapp.com/api/v1/events")
       .then((response) => response.json())
       .then((jsondata) => {
@@ -43,7 +50,7 @@ const AppMenu = () => {
         setEvents(jsondata.data[0].data);
       })
       .catch(err => console.error(err));
-  };
+  };*/
 
   const getRestaurants = () => {
     fetch("https://qvik.herokuapp.com/api/v1/restaurants")
@@ -83,4 +90,7 @@ const useStyles = makeStyles(theme =>
   }),
 )
 
-export default AppMenu;
+export default connect((state) => {
+  return { events: state.events.eventsData };
+}, {}
+)(AppMenu);

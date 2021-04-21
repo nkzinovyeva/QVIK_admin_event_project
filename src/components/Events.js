@@ -6,6 +6,7 @@ import "ag-grid-community/dist/styles/ag-theme-material.css";
 import {Event} from './Event';
 import EditEvent from "./EditEvent";
 import AddEvent from "./AddEvent";
+import SubEventList from "./events/subEventsList"
 
 
 function Events() {
@@ -154,6 +155,7 @@ function Events() {
       <div style={{marginLeft: '150px'}}>
         <Event preloadedValues={mainEvent} tagsList={tags}/>
         <h3>Sub-events</h3>
+        <SubEventList />
         <AddEvent createEvent = {createEvent}/>
           <div style ={{height: "700px", width: "95%", margin: "auto"}}>
                 <AgGridReact 
@@ -170,6 +172,7 @@ function Events() {
                 >
                 </AgGridReact>
             </div>
+            
       </div>
       : <div>Loading...</div>
       )

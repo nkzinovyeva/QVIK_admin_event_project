@@ -21,7 +21,7 @@ export const AppMenuItemPropTypes = {
 }
 
 const AppMenuItem = props => {
-  const { name, link, items = [] } = props
+  const { name, link, items, type, data } = props
   const classes = useStyles()
   const isExpandable = items && items.length > 0
   const [open, setOpen] = React.useState(false)
@@ -31,7 +31,7 @@ const AppMenuItem = props => {
   }
 
   const MenuItemRoot = (
-    <AppMenuItemComponent className={classes.menuItem} link={link} onClick={handleClick}>
+    <AppMenuItemComponent className={classes.menuItem} link={link} onClick={handleClick} type = {type} data = {data}>
       <ListItemText primary={name} />
       {/* Display the expand menu if the item has children */}
       {isExpandable && !open && <IconExpandMore />}

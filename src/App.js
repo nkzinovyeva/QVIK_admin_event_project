@@ -11,8 +11,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Home from './components/Home';
 import PageEvents from './components/Events';
 import PageRestaurants from './components/Restaurants';
-
-import AppMenu from './AppMenu'
+import AppMenu from './menu/AppMenu'
 
 function ResponsiveDrawer(props) {
   const { window } = props;
