@@ -46,7 +46,7 @@ export const editEvent = (event, id) => {
 };
 
 export const deleteEvent = (id) => {
-    let url = `${EVENTS_URL}` + id;
+    let url = `${EVENTS_URL}` +'/' + id;
     try {
         return async dispatch => {
             await axios.delete(url)

@@ -29,14 +29,14 @@ const AppMenuItemComponent = props => {
         >
           <ListItemText children={children} />
           <ListItemIcon>
-            <EditEvent  event={data} />
+            <EditEvent event={data} />
           </ListItemIcon>
       </ListItem>
     )
   }
 
 
-  if (type === "rest" ) {
+  if (type === "rest") {
     return (
       <ListItem
         button

@@ -23,7 +23,7 @@ export default function EditEvent(props) {
             active: props.event.active,
             mainEvent: props.event.mainEvent
         });
-  }, [props]);
+  }, []);
 
   const [show, setShow] = useState(false);
 

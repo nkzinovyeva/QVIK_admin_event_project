@@ -35,21 +35,11 @@ const AppMenu = (props) => {
   ]
 
   useEffect(() => {
-    //getEvents();
     fetchEvents();
     getRestaurants();
   }, []);
 
- /* const getEvents = () => {
-    fetch("https://qvik.herokuapp.com/api/v1/events")
-      .then((response) => response.json())
-      .then((jsondata) => {
-        console.log('jsondata', jsondata.data[0].data)
-        setEvents(jsondata.data[0].data);
-      })
-      .catch(err => console.error(err));
-  };*/
-
+ 
   const getRestaurants = () => {
     fetch("https://qvik.herokuapp.com/api/v1/restaurants")
       .then((response) => response.json())
