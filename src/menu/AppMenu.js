@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react"; 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from "react-redux";
-import { getEvents, editEvent } from '../redux/actions/events';
+import { getEvents } from '../redux/actions/events';
 import List from '@material-ui/core/List';
 import AppMenuItem from './AppMenuItem';
 
 const AppMenu = (props) => {
   const classes = useStyles()
-  //const [events, setEvents] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
 
   const events = useSelector(state => state.eventReducer.events)
   const dispatch = useDispatch();
   const fetchEvents = () => dispatch(getEvents());
-
-  //useEffect(() => {
-    //dispatch(fetchAllEvents());
- // }, [dispatch]);
 
   const appMenuItems = [
     {

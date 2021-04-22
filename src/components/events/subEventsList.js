@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteEvent, getEvents, editEvent } from '../../redux/actions/events';
+import { getEvents } from '../../redux/actions/events';
 import { AgGridReact } from "ag-grid-react";
 import EditEvent from "./editEvent"
 import DeleteEvent from "./deleteEvent"
@@ -13,7 +13,6 @@ const SubEventList = (props) => {
   const events = useSelector(state => state.eventReducer.events)
   const dispatch = useDispatch();
   const fetchEvents = () => dispatch(getEvents());
-  const deleteEvent = (id) => dispatch(deleteEvent(id));
 
   useEffect(() => {
     fetchEvents()

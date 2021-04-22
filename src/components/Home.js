@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from "react";
-import {Events} from './Events'
+import React from "react";
 
 function Home() {
 

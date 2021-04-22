@@ -6,13 +6,11 @@ import { editEvent } from '../../redux/actions/events';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function EditEvent(props) {
-    const [buttonAvailable, setButtonAvailable] = useState(false);
     const [event, setEvent] = useState({});
     const dispatch = useDispatch();
     const editOneEvent = (event, id) => dispatch(editEvent(event, id));
     
     useEffect(() => {
-        setButtonAvailable(true);
         setEvent({
             eventId: props.event.eventId,
             startDate: props.event.startDate,
@@ -55,7 +53,7 @@ export default function EditEvent(props) {
     setValidated(true);
   };
 
-  if (buttonAvailable) {
+
     return (
       <>
         <Button variant="light" className={"ml-3 mr-3"} onClick={handleShow}>
@@ -177,24 +175,11 @@ export default function EditEvent(props) {
               </Form.Group>
               <Button type="submit"> Update </Button>{" "}
               <Button variant="outline-secondary" onClick={handleClose}>
-                {" "}
-                Cancel{" "}
+                Cancel
               </Button>
             </Form>
           </Modal.Body>
         </Modal>
       </>
     );
-  }
-
-  return (
-    <>
-      <Button
-        variant="light"
-        className={'ml-3 mr-3'}
-        disabled>
-        Edit
-      </Button>
-    </>
-  );
 };

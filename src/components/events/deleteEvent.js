@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
+import { deleteEvent } from '../../redux/actions/events';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const DeleteEvent = (props) => {
-  const [buttonAvailable, setButtonAvailable] = useState(false);
-  useEffect(() => {
-      setButtonAvailable(true);
-  }, [props]);
 
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    //dispatch(deleteEvent(props.event.eventId));
+    dispatch(deleteEvent(props.event.eventId))
     handleClose();
-    setButtonAvailable(false);
   }
 
   const [show, setShow] = useState(false);
@@ -23,7 +19,7 @@ const DeleteEvent = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  if (buttonAvailable) {
+  
     return (
       <>
         <Button
@@ -58,19 +54,5 @@ const DeleteEvent = (props) => {
       </>
     );
   }
-
-  return (
-    <>
-      <Button
-        variant="danger"
-        className={'ml-3 mr-3'}
-        onClick={handleShow}
-        disabled
-      >
-        Delete
-      </Button>
-    </>
-  );
-}
 
 export default DeleteEvent;

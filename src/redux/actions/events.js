@@ -15,7 +15,6 @@ export const getEvents = () => {
         return async dispatch => {
           const response = await axios.get(`${EVENTS_URL}`);
           if (response.data) {
-              console.log('data', response.data.data[0].data)
             dispatch({
               type: GET_EVENTS,
               payload: response.data.data[0].data
@@ -23,7 +22,7 @@ export const getEvents = () => {
           } else {
             console.log('Unable to fetch data from the API !');
           }
-        };
+        }
     } catch (error) {
         console.log(error);
       }
