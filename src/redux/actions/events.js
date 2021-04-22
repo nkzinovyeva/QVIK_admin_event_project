@@ -29,7 +29,7 @@ export const getEvents = () => {
 };
 
 export const editEvent = (event, id) => {
-    let url = `${EVENTS_URL}` + id;
+    let url = `${EVENTS_URL}`+'/' + id;
     try {
         return async dispatch => {
             await axios.put(url, event)
