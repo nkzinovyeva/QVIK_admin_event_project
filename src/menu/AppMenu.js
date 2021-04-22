@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"; 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { useDispatch, connect } from "react-redux";
-import { fetchAllEvents } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getEvents, editEvent } from '../redux/actions/events';
 import List from '@material-ui/core/List';
 import AppMenuItem from './AppMenuItem';
 
@@ -10,11 +10,13 @@ const AppMenu = (props) => {
   //const [events, setEvents] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
 
+  const events = useSelector(state => state.eventReducer.events)
   const dispatch = useDispatch();
+  const fetchEvents = () => dispatch(getEvents());
 
-  useEffect(() => {
-    dispatch(fetchAllEvents());
-  }, [dispatch]);
+  //useEffect(() => {
+    //dispatch(fetchAllEvents());
+ // }, [dispatch]);
 
   const appMenuItems = [
     {
@@ -31,7 +33,7 @@ const AppMenu = (props) => {
     {
       name: 'Events',
       link: '/events',
-      items: props.events.map(event => {
+      items: events.map(event => {
         return { name: event.title, type: 'event', data: event }
       })
     },
@@ -39,6 +41,7 @@ const AppMenu = (props) => {
 
   useEffect(() => {
     //getEvents();
+    fetchEvents();
     getRestaurants();
   }, []);
 
@@ -90,7 +93,4 @@ const useStyles = makeStyles(theme =>
   }),
 )
 
-export default connect((state) => {
-  return { events: state.events.eventsData };
-}, {}
-)(AppMenu);
+export default AppMenu;

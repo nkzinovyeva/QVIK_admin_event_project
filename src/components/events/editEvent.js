@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import { Modal, Form, Col, Button } from 'react-bootstrap';
-import { connect, useDispatch } from "react-redux";
-import { editEvent } from "../../redux/actions";
+import { useDispatch } from "react-redux";
+import { editEvent } from '../../redux/actions/events';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const EditEvent = (props) => {
+export default function EditEvent(props) {
     const [buttonAvailable, setButtonAvailable] = useState(false);
     const [event, setEvent] = useState({});
+    const dispatch = useDispatch();
+    const editOneEvent = (event, id) => dispatch(editEvent(event, id));
     
     useEffect(() => {
         setButtonAvailable(true);
@@ -29,14 +31,13 @@ const EditEvent = (props) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const handleInputChange = (e) => {
     setEvent({...event, [e.target.name]: e.target.value})
   }
 
-  const dispatch = useDispatch();
-
   const handleEdit = () => {
-    dispatch(editEvent(event));
+    editOneEvent(event, event.eventId)
     handleClose();
   }
 
@@ -48,6 +49,7 @@ const EditEvent = (props) => {
       e.preventDefault();
       e.stopPropagation();
     } else {
+      console.log('Im here')
       handleEdit();
     }
     setValidated(true);
@@ -195,10 +197,4 @@ const EditEvent = (props) => {
       </Button>
     </>
   );
-}
-
-export default connect(
-  state => {
-      return { events: state.events.eventsData}
-  }, {editEvent}
-)(EditEvent)
+};

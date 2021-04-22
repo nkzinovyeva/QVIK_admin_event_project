@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { useDispatch, connect } from "react-redux";
-import { fetchAllEvents } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteEvent, getEvents, editEvent } from '../../redux/actions/events';
 import { AgGridReact } from "ag-grid-react";
 import EditEvent from "./editEvent"
 import DeleteEvent from "./deleteEvent"
@@ -9,11 +9,15 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
 
 const SubEventList = (props) => {
+
+  const events = useSelector(state => state.eventReducer.events)
   const dispatch = useDispatch();
+  const fetchEvents = () => dispatch(getEvents());
+  const deleteEvent = (id) => dispatch(deleteEvent(id));
 
   useEffect(() => {
-    dispatch(fetchAllEvents());
-  }, [dispatch]);
+    fetchEvents()
+  }, []);
 
   const columns = [
     {
@@ -49,7 +53,7 @@ const SubEventList = (props) => {
           params.api.sizeColumnsToFit();
         }}
         columnDefs={columns}
-        rowData={props.events}
+        rowData={events}
         pagination={true}
         paginationAutoPageSize={10}
       >
@@ -58,7 +62,4 @@ const SubEventList = (props) => {
   );
 };
 
-export default connect((state) => {
-  return { events: state.events.eventsData };
-}, {}
-)(SubEventList);
+export default SubEventList;

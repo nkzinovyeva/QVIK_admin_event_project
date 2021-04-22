@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { connect, useDispatch } from "react-redux";
-import { deleteEvent } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,7 +13,7 @@ const DeleteEvent = (props) => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteEvent(props.event.eventId));
+    //dispatch(deleteEvent(props.event.eventId));
     handleClose();
     setButtonAvailable(false);
   }
@@ -74,8 +73,4 @@ const DeleteEvent = (props) => {
   );
 }
 
-export default connect(
-  state => {
-    return { events: state.events.eventsData }
-  }, { deleteEvent }
-)(DeleteEvent);
+export default DeleteEvent;
