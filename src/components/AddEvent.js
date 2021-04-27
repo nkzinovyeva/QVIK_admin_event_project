@@ -62,8 +62,7 @@ function AddEvent(props) {
   };
     
   const handleSave = () => {
-    props.createEvent(subevent);
-
+    props.createEvent(subevent, stage, presenter);
     handleClose()
   };
 

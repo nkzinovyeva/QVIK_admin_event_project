@@ -101,7 +101,7 @@ function Events() {
   };
 
   //create event
-  const createEvent = (event) => {
+  const createEvent = (event, stage, presenter) => {
     fetch("https://qvik.herokuapp.com/api/v1/events/", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -113,7 +113,44 @@ function Events() {
         setOpen(true);
     })
       .catch((err) => console.log(err));
-};
+      linkEventStage(stage);
+      linkEventPresenter(presenter);
+  };
+
+  //link stage to the event 
+  const linkEventStage = (stage) => {
+    getEvents();
+    fetch("https://qvik.herokuapp.com/api/v1/link-event-stage/", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: {"sourceId":stage, "destinationId":events.slice(-1).pop().eventId}
+    })
+    .then(_ => getEvents())
+    .then(_ => {
+        setMsg("New Link between event and stages created");
+        setOpen(true);
+        console.log(stage);
+        console.log(events.slice(-1).pop().eventId);
+    })
+      .catch((err) => console.log(err));
+  };
+  //link presenter to the event
+  const linkEventPresenter = (presenter) => {
+    getEvents();
+    fetch("https://qvik.herokuapp.com/api/v1/link-event-presenter/", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: {"sourceId":presenter, "destinationId":events.slice(-1).pop().eventId}
+    })
+    .then(_ => getEvents())
+    .then(_ => {
+        setMsg("New Link between event and presenters created");
+        setOpen(true);
+        console.log(presenter);
+        console.log(events.slice(-1).pop().eventId);
+    })
+      .catch((err) => console.log(err));
+  };
 
 
   //delete event
