@@ -6,11 +6,7 @@ import "ag-grid-community/dist/styles/ag-theme-material.css";
 import {Event} from './Event';
 import EditEvent from "./EditEvent";
 import AddEvent from "./AddEvent";
-import SubEventList from "./events/subEventsList"
-
-import { useDispatch, useSelector } from "react-redux";
-import { getStages } from '../redux/actions/stages';
-import { getPresenters } from '../redux/actions/presenters';
+import SubEventList from "./events/subEventsList";
 
 
 function Events() {
@@ -23,20 +19,11 @@ function Events() {
   const gridRef = useRef();
   let link = "https://qvik.herokuapp.com/api/v1/events";
 
-  const stages = useSelector(state => state.stageReducer.stages)
-  const dispatch = useDispatch();
-  const fetchStages = () => dispatch(getStages());
-
-  const presenters = useSelector(state => state.presenterReducer.presenters)
-  const fetchPresenters = () => dispatch(getPresenters());
-
   useEffect(() => {
     const fetchData = async () => {
       setTags(await getTags())
       setMainEvent(await getMainEvent())
       setEvents(await getEvents())
-      fetchStages()
-      fetchPresenters()
     } 
     fetchData()
   }, []) 
@@ -169,7 +156,7 @@ function Events() {
         <Event preloadedValues={mainEvent} tagsList={tags}/>
         <h3>Sub-events</h3>
         <SubEventList />
-        <AddEvent createEvent = {createEvent} stages={stages} presenters={presenters}/>
+        <AddEvent createEvent = {createEvent}/>
           <div style ={{height: "700px", width: "95%", margin: "auto"}}>
                 <AgGridReact 
                     ref = {gridRef}

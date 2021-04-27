@@ -8,23 +8,24 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
+import { useDispatch, useSelector } from "react-redux";
+import { getStages } from '../redux/actions/stages';
+import { getPresenters } from '../redux/actions/presenters';
+
 /*
 * add event modal
 */
 function AddEvent(props) {
 
+  const stagesList = useSelector(state => state.stageReducer.stages)
+  const dispatch = useDispatch();
+  const fetchStages = () => dispatch(getStages());
+
+  const presentersList = useSelector(state => state.presenterReducer.presenters)
+  const fetchPresenters = () => dispatch(getPresenters());
+
   //set constants  
   const [open, setOpen] = useState(false);
-  const [stagesList, setStagesList] = React.useState([{
-    name:"test",
-    stageId:"test2"
-  }]);
-
-  const [presentersList, setPresentersList] = React.useState([{
-    name:"test",
-    presenterId:"test2"
-  }]);
-
   const [subevent, setSubevent] = useState({
     startDate: "",
     startTime: "",
@@ -38,14 +39,11 @@ function AddEvent(props) {
   const [presenter, setPresenter] = useState('');
 
   useEffect(() => {
-    setStagesList(props.stages)
-    setPresentersList(props.presenters)
+    fetchStages()
+    fetchPresenters()
   }, []);
 
   const handleClickOpen = () => {
-    console.log("oui");
-    console.log(stagesList);
-    console.log(presentersList);
     setOpen(true);
   };
      
@@ -65,6 +63,7 @@ function AddEvent(props) {
     
   const handleSave = () => {
     props.createEvent(subevent);
+
     handleClose()
   };
 
@@ -158,9 +157,7 @@ function AddEvent(props) {
               onChange={handleStageChange}
               fullWidth
             >
-              <MenuItem value={stagesList.stageId}>{stagesList.name}</MenuItem>
-              <MenuItem value={stagesList.stageId}>{stagesList.name}</MenuItem>
-              <MenuItem value={stagesList.stageId}>{stagesList.name}</MenuItem>
+              {stagesList.map(stage=><MenuItem value={stage.stageId}>{stage.name}</MenuItem>)}
             </Select>
             <InputLabel id="demo-simple-select-label">Presenter</InputLabel>
             <Select
@@ -170,9 +167,7 @@ function AddEvent(props) {
               onChange={handlePresenterChange}
               fullWidth
             >
-              <MenuItem value={presentersList.presenterId}>{presentersList.name}</MenuItem>
-              <MenuItem value={presentersList.presenterId}>{presentersList.name}</MenuItem>
-              <MenuItem value={presentersList.presenterId}>{presentersList.name}</MenuItem>
+              {presentersList.map(presenter=><MenuItem value={presenter.presenterId}>{presenter.name}</MenuItem>)} 
             </Select>
           </DialogContent>
         <DialogActions>
