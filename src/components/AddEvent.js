@@ -121,6 +121,22 @@ function AddEvent(props) {
                 label="Full Description"
                 fullWidth
             />
+            <TextField
+                name="stage"
+                value={subevent.stage}
+                onChange = {handleInputChange}
+                margin="dense"
+                label="Stage"
+                fullWidth
+            />
+            <TextField
+                name="presenters"
+                value={subevent.presenters}
+                onChange = {handleInputChange}
+                margin="dense"
+                label="Presenters"
+                fullWidth
+            />
           </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
