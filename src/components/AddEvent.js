@@ -1,9 +1,12 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, TextField, Dialog, DialogActions, DialogContent, Tooltip, 
   DialogContentText, DialogTitle, IconButton}  from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 
 /*
 * add event modal
@@ -12,6 +15,16 @@ function AddEvent(props) {
 
   //set constants  
   const [open, setOpen] = useState(false);
+  const [stagesList, setStagesList] = React.useState([{
+    name:"test",
+    stageId:"test2"
+  }]);
+
+  const [presentersList, setPresentersList] = React.useState([{
+    name:"test",
+    presenterId:"test2"
+  }]);
+
   const [subevent, setSubevent] = useState({
     startDate: "",
     startTime: "",
@@ -21,8 +34,18 @@ function AddEvent(props) {
     shortDescription: "",
     fullDescription: ""
   });
-  
+  const [stage, setStage] = useState('');
+  const [presenter, setPresenter] = useState('');
+
+  useEffect(() => {
+    setStagesList(props.stages)
+    setPresentersList(props.presenters)
+  }, []);
+
   const handleClickOpen = () => {
+    console.log("oui");
+    console.log(stagesList);
+    console.log(presentersList);
     setOpen(true);
   };
      
@@ -32,6 +55,12 @@ function AddEvent(props) {
 
 	const handleInputChange = e => {
     setSubevent({ ...subevent, [e.target.name]: e.target.value });
+  };
+  const handleStageChange = e => {
+    setStage(e.target.value);
+  };
+  const handlePresenterChange = e => {
+    setPresenter(e.target.value);
   };
     
   const handleSave = () => {
@@ -121,22 +150,30 @@ function AddEvent(props) {
                 label="Full Description"
                 fullWidth
             />
-            <TextField
-                name="stage"
-                value={subevent.stage}
-                onChange = {handleInputChange}
-                margin="dense"
-                label="Stage"
-                fullWidth
-            />
-            <TextField
-                name="presenters"
-                value={subevent.presenters}
-                onChange = {handleInputChange}
-                margin="dense"
-                label="Presenters"
-                fullWidth
-            />
+            <InputLabel id="demo-simple-select-label">Stage</InputLabel>
+            <Select
+              label="Stage"
+              name="stage"
+              value={stage}
+              onChange={handleStageChange}
+              fullWidth
+            >
+              <MenuItem value={stagesList.stageId}>{stagesList.name}</MenuItem>
+              <MenuItem value={stagesList.stageId}>{stagesList.name}</MenuItem>
+              <MenuItem value={stagesList.stageId}>{stagesList.name}</MenuItem>
+            </Select>
+            <InputLabel id="demo-simple-select-label">Presenter</InputLabel>
+            <Select
+              label="Presenter"
+              name="presenter"
+              value={presenter}
+              onChange={handlePresenterChange}
+              fullWidth
+            >
+              <MenuItem value={presentersList.presenterId}>{presentersList.name}</MenuItem>
+              <MenuItem value={presentersList.presenterId}>{presentersList.name}</MenuItem>
+              <MenuItem value={presentersList.presenterId}>{presentersList.name}</MenuItem>
+            </Select>
           </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
