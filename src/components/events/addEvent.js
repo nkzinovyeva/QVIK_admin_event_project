@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStages } from '../../redux/actions/stages';
 import { getPresenters } from '../../redux/actions/presenters';
 import { addEvent } from '../../redux/actions/events';
+import { linkEventPresenter,linkEventStage } from '../../redux/actions/links';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -52,8 +53,9 @@ export default function AddEvent(props) {
 
     const handleAdd = () => {
         dispatch(addEvent(event))
+        dispatch(linkEventPresenter(event, presenter))
+        dispatch(linkEventStage(event, stage))
         console.log("adding event");
-        //props.createEvent(event, stage, presenter);
         handleClose();
     }
 
@@ -66,12 +68,13 @@ export default function AddEvent(props) {
             e.stopPropagation();
             } else {
               handleAdd();
+              console.log("want to add event");
         }
         setValidated(true);
     };
 
     return (
-      <>
+      <>4
         <Button variant="light" className={"ml-3 mr-3"} onClick={handleShow}>
           Add Event
         </Button>
