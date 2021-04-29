@@ -52,11 +52,11 @@ export default function AddEvent(props) {
       };
 
     const handleAdd = () => {
-        dispatch(addEvent(event))
-        dispatch(linkEventPresenter(event, presenter))
-        dispatch(linkEventStage(event, stage))
-        console.log("adding event");
-        handleClose();
+      console.log("adding event"); 
+      dispatch(addEvent(event))
+      dispatch(linkEventPresenter(event, presenter))
+      dispatch(linkEventStage(event, stage))
+      handleClose();
     }
 
     const [validated, setValidated] = useState(false);
