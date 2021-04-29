@@ -56,7 +56,9 @@ export default function EditEvent(props) {
 
     return (
       <>
-        <Button variant="light" className={"ml-3 mr-3"} onClick={handleShow}>
+        <Button
+         variant="link" 
+         onClick={handleShow}>
           Edit
         </Button>
 

@@ -23,8 +23,7 @@ const DeleteEvent = (props) => {
     return (
       <>
         <Button
-          //variant="danger"
-          className={'ml-3 mr-3'}
+          variant="link"
           onClick={handleShow}
         >
           Delete

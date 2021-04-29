@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvents } from '../../redux/actions/events';
 import { AgGridReact } from "ag-grid-react";
-import EditEvent from "./editEvent"
-import DeleteEvent from "./deleteEvent"
+import EditEvent from "../events/editEvent"
+import DeleteEvent from "../events/deleteEvent"
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";

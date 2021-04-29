@@ -1,29 +1,31 @@
 import React, { useState, useEffect, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
-import { Tooltip, IconButton} from "@material-ui/core";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
-import {Event} from './Event';
-import EditEvent from "./EditEvent";
+import { useDispatch, useSelector } from "react-redux";
+import { getEvents } from '../redux/actions/events';
+import {Event} from './notInUse/Event';
 import AddEvent from "./events/addEvent";
-import SubEventList from "./events/subEventsList";
+import EditEvent from "./events/editEvent";
+import DeleteEvent from "./events/deleteEvent";
 
 
 function Events() {
 
   const [mainEvent, setMainEvent] = useState([]);
   const [tags, setTags] = useState([]);
-  const [events, setEvents] = useState([]);
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState("");
   const gridRef = useRef();
-  let link = "https://qvik.herokuapp.com/api/v1/events";
+  const events = useSelector(state => state.eventReducer.events)
+  const dispatch = useDispatch();
+  const fetchEvents = () => dispatch(getEvents());
 
   useEffect(() => {
     const fetchData = async () => {
       setTags(await getTags())
       setMainEvent(await getMainEvent())
-      setEvents(await getEvents())
+      fetchEvents()
     } 
     fetchData()
   }, []) 
@@ -35,20 +37,12 @@ function Events() {
       {headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
       {headerName: "", 
           field: "", 
-          cellRendererFramework: params => <EditEvent updateEvent={updateEvent} event={params.data} /> 
+          cellRendererFramework: params => <EditEvent event={params.data} /> 
       },
       {headerName: "", 
             field: "eventId", 
-            cellRendererFramework: params => <Tooltip title="Delete sub-event">
-                                                <IconButton variant="text" 
-                                                        color="secondary" 
-                                                        size="small" 
-                                                        aria-label="delete"
-                                                        onClick = {() => deleteEvent(params.data.eventId)} >
-                                                        DELETE
-                                                </IconButton>
-                                            </Tooltip>
-        },
+            cellRendererFramework: params => <DeleteEvent event={params.data} />
+      }
   ];
 
   //get mainEvent from the database
@@ -71,32 +65,6 @@ function Events() {
         .catch(err => console.error(err));
   };
 
-  //get Sub-events from the database
-  const getEvents = () => {
-      fetch(link)
-        .then((response) => response.json())
-        .then((jsondata) => { 
-          setEvents(jsondata.data[0].data);
-        })
-          .catch(err => console.error(err));
-  };
-
-
-  //update event
-  const updateEvent = (event, id) => {
-      console.log('stingify', JSON.safeStringify(event))
-      fetch("https://qvik.herokuapp.com/api/v1/events/" + id, {
-          method: "PUT",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.safeStringify(event)
-      })
-      .then(_ => getEvents())
-      .then(_ => {
-          setMsg("Event updated");
-          setOpen(true);
-      })
-        .catch((err) => console.log(err));
-  };
 
   //create event
   const createEvent = (event, stage, presenter) => {
@@ -105,7 +73,7 @@ function Events() {
         headers: {"Content-Type": "application/json"},
         body: JSON.safeStringify(event)
     })
-    .then(_ => getEvents())
+    //.then(_ => getEvents())
     .then(_ => linkEventStage(stage))
     .then(_ => linkEventPresenter(presenter))
     .then(_ => {
@@ -117,13 +85,13 @@ function Events() {
 
   //link stage to the event 
   const linkEventStage = (stage) => {
-    getEvents();
+   // getEvents();
     fetch("https://qvik.herokuapp.com/api/v1/link-event-stage/", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: {"sourceId":stage, "destinationId":events.slice(-1).pop().eventId}
     })
-    .then(_ => getEvents())
+    //.then(_ => getEvents())
     .then(_ => {
         setMsg("New Link between event and stages created");
         setOpen(true);
@@ -132,15 +100,16 @@ function Events() {
     })
       .catch((err) => console.log(err));
   };
+  
   //link presenter to the event
   const linkEventPresenter = (presenter) => {
-    getEvents();
+   // getEvents();
     fetch("https://qvik.herokuapp.com/api/v1/link-event-presenter/", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: {"sourceId":presenter, "destinationId":events.slice(-1).pop().eventId}
     })
-    .then(_ => getEvents())
+    //.then(_ => getEvents())
     .then(_ => {
         setMsg("New Link between event and presenters created");
         setOpen(true);
@@ -148,23 +117,6 @@ function Events() {
         console.log(events.slice(-1).pop().eventId);
     })
       .catch((err) => console.log(err));
-  };
-
-
-  //delete event
-  const deleteEvent = (id) => {
-    console.log('id', id)
-    if (window.confirm("Are you sure?")) {
-        fetch("https://qvik.herokuapp.com/api/v1/events/" + id, {
-          method: "DELETE"
-        })
-        .then(_ => getEvents())
-        .then(_ => {
-            setMsg("Sub-event deleted")
-            setOpen(true)
-        })
-        .catch(err => console.error(err));
-      }
   };
 
   //method for safe Stringify JSON
@@ -190,7 +142,6 @@ function Events() {
       <div style={{marginLeft: '150px'}}>
         <Event preloadedValues={mainEvent} tagsList={tags}/>
         <h3>Sub-events</h3>
-        <SubEventList />
         <AddEvent createEvent = {createEvent}/>
           <div style ={{height: "700px", width: "95%", margin: "auto"}}>
                 <AgGridReact 

@@ -9,8 +9,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
 import { useDispatch, useSelector } from "react-redux";
-import { getStages } from '../redux/actions/stages';
-import { getPresenters } from '../redux/actions/presenters';
+import { getStages } from '../../redux/actions/stages';
+import { getPresenters } from '../../redux/actions/presenters';
 
 /*
 * add event modal

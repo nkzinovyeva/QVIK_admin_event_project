@@ -36,7 +36,7 @@ export const editEvent = (event, id) => {
                 .then(response => {
                     dispatch({
                         type: EDIT_EVENT,
-                        payload: event
+                        payload: response
                     });
                 });
         };
