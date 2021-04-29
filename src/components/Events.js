@@ -5,7 +5,7 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
 import {Event} from './Event';
 import EditEvent from "./EditEvent";
-import AddEvent from "./AddEvent";
+import AddEvent from "./events/addEvent";
 import SubEventList from "./events/subEventsList";
 
 
