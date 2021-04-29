@@ -3,6 +3,7 @@ import { Modal, Form, Col, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { getStages } from '../../redux/actions/stages';
 import { getPresenters } from '../../redux/actions/presenters';
+import { addEvent } from '../../redux/actions/events';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -50,7 +51,9 @@ export default function AddEvent(props) {
       };
 
     const handleAdd = () => {
-        props.createEvent(event, stage, presenter);
+        dispatch(addEvent(event))
+        console.log("adding event");
+        //props.createEvent(event, stage, presenter);
         handleClose();
     }
 
@@ -62,8 +65,7 @@ export default function AddEvent(props) {
             e.preventDefault();
             e.stopPropagation();
             } else {
-            console.log('Im here')
-            handleAdd();
+              handleAdd();
         }
         setValidated(true);
     };
@@ -81,7 +83,7 @@ export default function AddEvent(props) {
           onHide={handleClose}
         >
           <Modal.Header>
-            <Modal.Title>Edit sub-event info: </Modal.Title>
+            <Modal.Title>Add new sub-event : </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={handleSubmit} noValidate validated={validated}>

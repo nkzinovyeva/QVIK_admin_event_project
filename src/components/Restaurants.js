@@ -10,7 +10,6 @@ function Restaurants() {
 
   useEffect(() => {
     getRestaurants();
-      //console.log('events', events)
   }, []);
 
   //set columns for the table

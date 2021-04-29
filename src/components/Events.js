@@ -66,7 +66,6 @@ function Events() {
     fetch("https://qvik.herokuapp.com/api/v1/tags")
       .then((response) => response.json())
       .then((jsondata) => { 
-        console.log('jsontags', jsondata.data )
         setTags(jsondata.data);
       })
         .catch(err => console.error(err));
@@ -77,7 +76,6 @@ function Events() {
       fetch(link)
         .then((response) => response.json())
         .then((jsondata) => { 
-          console.log('jsondata', jsondata.data[0].data )
           setEvents(jsondata.data[0].data);
         })
           .catch(err => console.error(err));
@@ -108,13 +106,13 @@ function Events() {
         body: JSON.safeStringify(event)
     })
     .then(_ => getEvents())
+    .then(_ => linkEventStage(stage))
+    .then(_ => linkEventPresenter(presenter))
     .then(_ => {
         setMsg("New Sub-event added");
         setOpen(true);
     })
       .catch((err) => console.log(err));
-      linkEventStage(stage);
-      linkEventPresenter(presenter);
   };
 
   //link stage to the event 

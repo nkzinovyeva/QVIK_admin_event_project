@@ -20,7 +20,7 @@ export const getEvents = () => {
               payload: response.data.data[0].data
             });
           } else {
-            console.log('Unable to fetch data from the API !');
+            console.log('Unable to fetch data from the API for events !');
           }
         }
     } catch (error) {
@@ -65,7 +65,7 @@ export const deleteEvent = (id) => {
 export const addEvent = (event) => {
     try {
         return async dispatch => {
-            await axios.post('', event)
+            await axios.post(`${EVENTS_URL}`, event)
                 .then(response => {
                     dispatch({
                         type: ADD_EVENT,

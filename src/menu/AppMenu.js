@@ -44,7 +44,6 @@ const AppMenu = (props) => {
     fetch("https://qvik.herokuapp.com/api/v1/restaurants")
       .then((response) => response.json())
       .then((jsondata) => {
-        console.log('jsondata', jsondata.data.restaurants)
         setRestaurants(jsondata.data.restaurants);
       })
       .catch(err => console.error(err));
