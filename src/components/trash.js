@@ -110,3 +110,6 @@ JSON.safeStringify = (obj, indent = 2) => {
     cache = null;
     return retVal;
   };
+
+  const [open, setOpen] = useState(false);
+  const [msg, setMsg] = useState("");

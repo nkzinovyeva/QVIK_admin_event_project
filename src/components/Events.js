@@ -14,8 +14,6 @@ function Events() {
 
   const [mainEvent, setMainEvent] = useState([]);
   const [tags, setTags] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [msg, setMsg] = useState("");
   const gridRef = useRef();
   const events = useSelector(state => state.eventReducer.events)
   const dispatch = useDispatch();
@@ -40,8 +38,8 @@ function Events() {
           cellRendererFramework: params => <EditEvent event={params.data} /> 
       },
       {headerName: "", 
-            field: "", 
-            cellRendererFramework: params => <DeleteEvent event={params.data} />
+          field: "", 
+          cellRendererFramework: params => <DeleteEvent event={params.data} />
       }
   ];
 
@@ -80,7 +78,7 @@ function Events() {
                         params.api.sizeColumnsToFit();
                     }}
                     columnDefs = {columns}
-                    suppressCellSelection = {true}
+                    //suppressCellSelection = {true}
                     rowData = {events}
                     pagination = {true}
                     paginationPageSize = {10}

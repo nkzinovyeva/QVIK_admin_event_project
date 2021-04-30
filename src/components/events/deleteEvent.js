@@ -32,6 +32,7 @@ const DeleteEvent = (props) => {
         <Modal
           show={show}
           aria-labelledby='contained-modal-title-vcenter'
+          onHide={handleClose}
         >
           <Modal.Header>
             <Modal.Title>Confirm your action:  </Modal.Title>
