@@ -130,6 +130,26 @@ console.log('props', props)
                 label="full Description"
                 fullWidth
             />
+            <InputLabel id="demo-simple-select-label">Stage</InputLabel>
+            <Select
+              label="Stage"
+              name="stage"
+              value={stage}
+              onChange={handleStageChange}
+              fullWidth
+            >
+              {stagesList.map(stage=><MenuItem value={stage.stageId}>{stage.name}</MenuItem>)}
+            </Select>
+            <InputLabel id="demo-simple-select-label">Presenter</InputLabel>
+            <Select
+              label="Presenter"
+              name="presenter"
+              value={presenter}
+              onChange={handlePresenterChange}
+              fullWidth
+            >
+              {presentersList.map(presenter=><MenuItem value={presenter.presenterId}>{presenter.name}</MenuItem>)} 
+            </Select>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">

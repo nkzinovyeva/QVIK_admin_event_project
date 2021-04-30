@@ -1,14 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import { Modal, Form, Col, Button } from 'react-bootstrap';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editEvent } from '../../redux/actions/events';
+import { linkEventPresenter, linkEventStage } from '../../redux/actions/links'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function EditEvent(props) {
+
+    const stagesList = useSelector(state => state.stageReducer.stages)
+    const presentersList = useSelector(state => state.presenterReducer.presenters)
     const [event, setEvent] = useState({});
     const dispatch = useDispatch();
-    const editOneEvent = (event, id) => dispatch(editEvent(event, id));
+    //const editOneEvent = (event, id) => dispatch(editEvent(event, id));
     
     useEffect(() => {
         setEvent({
@@ -20,10 +24,15 @@ export default function EditEvent(props) {
             title: props.event.title, 
             shortDescription: props.event.shortDescription,
             fullDescription: props.event.fullDescription,
+            //presenter: props.event.presenters[0].name,
+            stage: props.event.stage.name,
             active: props.event.active,
             mainEvent: props.event.mainEvent
         });
   }, []);
+
+  const [stage, setStage] = useState('');
+  const [presenter, setPresenter] = useState('');
 
   const [show, setShow] = useState(false);
 
@@ -35,9 +44,18 @@ export default function EditEvent(props) {
   }
 
   const handleEdit = () => {
-    editOneEvent(event, event.eventId)
+    dispatch(editEvent(event, event.eventId))
+    dispatch(linkEventPresenter(event.eventId, presenter.presenterId))
+    dispatch(linkEventStage(stage.stageId, event.eventId))
     handleClose();
   }
+  
+  const handleStageChange = e => {
+    setStage(e.target.value);
+  };
+  const handlePresenterChange = e => {
+    setPresenter(e.target.value);
+  };
 
   const [validated, setValidated] = useState(false);
 
@@ -171,6 +189,40 @@ export default function EditEvent(props) {
                   label="full Description"
                   required
                 />
+                <Form.Control.Feedback type="invalid">
+                  This field can't be empty.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label> Stage {event.stage}: </Form.Label>
+                    <Form.Control 
+                        as="select"
+                        type="text"
+                        name="stage"
+                        value={stage}
+                        onChange={handleStageChange}
+                        label="stage"
+                        required  
+                        >
+                            {stagesList.map(stage=><option value={stage.stageId}>{stage.name}</option>)}
+                    </Form.Control>
+                <Form.Control.Feedback type="invalid">
+                  This field can't be empty.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label> Presenter {event.presenter}: </Form.Label>
+                    <Form.Control 
+                        as="select"
+                        type="text"
+                        name="presenter"
+                        value={presenter}
+                        onChange={handlePresenterChange}
+                        label="presenter"
+                        required  
+                        >
+                        {presentersList.map(presenter=><option value={presenter.presenterId}>{presenter.name}</option>)} 
+                    </Form.Control>
                 <Form.Control.Feedback type="invalid">
                   This field can't be empty.
                 </Form.Control.Feedback>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStages } from '../../redux/actions/stages';
 import { getPresenters } from '../../redux/actions/presenters';
 import { addEvent } from '../../redux/actions/events';
-import { linkEventPresenter,linkEventStage } from '../../redux/actions/links';
+import { linkEventPresenter, linkEventStage } from '../../redux/actions/links';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -54,8 +54,8 @@ export default function AddEvent(props) {
     const handleAdd = () => {
       console.log("adding event"); 
       dispatch(addEvent(event))
-      dispatch(linkEventPresenter(event, presenter))
-      dispatch(linkEventStage(event, stage))
+      dispatch(linkEventPresenter(event.eventId, presenter.presenterId))
+      dispatch(linkEventStage(event.eventId, stage.stageId))
       handleClose();
     }
 
