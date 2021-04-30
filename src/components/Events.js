@@ -76,9 +76,10 @@ function Events() {
                     onGridReady = { params => {
                         gridRef.current = params.api;
                         params.api.sizeColumnsToFit();
+                        params.api.refreshCells()
                     }}
                     columnDefs = {columns}
-                    //suppressCellSelection = {true}
+                    suppressCellSelection = {true}
                     rowData = {events}
                     pagination = {true}
                     paginationPageSize = {10}
