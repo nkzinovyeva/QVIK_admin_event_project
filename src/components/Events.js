@@ -31,7 +31,7 @@ function Events() {
   //set columns for the table
   const columns = [
       {headerName: "Title", field: "title", sortable: true, filter: true, resizable: true },
-      //{headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
+      {headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
       {headerName: "", 
           field: "", 
           cellRendererFramework: params => <EditEvent event={params.data} /> 
@@ -44,7 +44,7 @@ function Events() {
 
     return  (
       mainEvent ? 
-      <div >
+      <div style={{marginLeft: '150px'}}>
         <Event />
         <h3>Sub-events</h3>
         <AddEvent />
@@ -53,7 +53,7 @@ function Events() {
                     ref = {gridRef}
                     onGridReady = { params => {
                         gridRef.current = params.api;
-                        //params.api.sizeColumnsToFit();
+                        params.api.sizeColumnsToFit();
                         params.api.refreshCells()
                     }}
                     columnDefs = {columns}
