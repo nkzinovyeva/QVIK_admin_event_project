@@ -1,13 +1,7 @@
 import axios from 'axios';
 import { GET_PRESENTERS, ADD_PRESENTER, DELETE_PRESENTER, EDIT_PRESENTER } from './types';
 import {
-    SETUP_URL,
-    EVENTS_URL,
-    RESTAURANT_URL,
     PRESENTERS_URL,
-    STAGES_URL,
-    VENUES_URL,
-    UPDATE_URL
   } from '../../config';
 
 export const getPresenters = () => {

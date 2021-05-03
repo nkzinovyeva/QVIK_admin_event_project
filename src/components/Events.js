@@ -3,8 +3,8 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getEvents } from '../redux/actions/events';
-import {Event} from './notInUse/Event';
+import { getEvents, getMainEvent } from '../redux/actions/events';
+import {Event} from './Event';
 import AddEvent from "./events/addEvent";
 import EditEvent from "./events/editEvent";
 import DeleteEvent from "./events/deleteEvent";
@@ -12,17 +12,16 @@ import DeleteEvent from "./events/deleteEvent";
 
 function Events() {
 
-  const [mainEvent, setMainEvent] = useState([]);
-  const [tags, setTags] = useState([]);
   const gridRef = useRef();
+  const mainEvent = useSelector(state => state.eventReducer.mainEvent)
   const events = useSelector(state => state.eventReducer.events)
   const dispatch = useDispatch();
   const fetchEvents = () => dispatch(getEvents());
+  const fetchMainEvent = () => dispatch(getMainEvent());
 
   useEffect(() => {
     const fetchData = async () => {
-      setTags(await getTags())
-      setMainEvent(await getMainEvent())
+      fetchMainEvent()
       fetchEvents()
     } 
     fetchData()
@@ -32,7 +31,7 @@ function Events() {
   //set columns for the table
   const columns = [
       {headerName: "Title", field: "title", sortable: true, filter: true, resizable: true },
-      {headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
+      //{headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
       {headerName: "", 
           field: "", 
           cellRendererFramework: params => <EditEvent event={params.data} /> 
@@ -43,31 +42,10 @@ function Events() {
       }
   ];
 
-  //get mainEvent from the database
-  const getMainEvent = () => {
-    fetch("https://qvik.herokuapp.com/api/v1/initial-setup")
-      .then((response) => response.json())
-      .then((jsondata) => { 
-        setMainEvent(jsondata.data);
-      })
-        .catch(err => console.error(err));
-  };
-
-  //get list of tags
-  const getTags = () => {
-    fetch("https://qvik.herokuapp.com/api/v1/tags")
-      .then((response) => response.json())
-      .then((jsondata) => { 
-        setTags(jsondata.data);
-      })
-        .catch(err => console.error(err));
-  };
-
-
     return  (
       mainEvent ? 
-      <div style={{marginLeft: '150px'}}>
-        <Event preloadedValues={mainEvent} tagsList={tags}/>
+      <div >
+        <Event />
         <h3>Sub-events</h3>
         <AddEvent />
           <div style ={{height: "700px", width: "95%", margin: "auto"}}>
@@ -75,7 +53,7 @@ function Events() {
                     ref = {gridRef}
                     onGridReady = { params => {
                         gridRef.current = params.api;
-                        params.api.sizeColumnsToFit();
+                        //params.api.sizeColumnsToFit();
                         params.api.refreshCells()
                     }}
                     columnDefs = {columns}
@@ -86,7 +64,6 @@ function Events() {
                 >
                 </AgGridReact>
             </div>
-            
       </div>
       : <div>Loading...</div>
       )

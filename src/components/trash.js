@@ -1,3 +1,23 @@
+//get mainEvent from the database
+const getMainEvent = () => {
+  fetch("https://qvik.herokuapp.com/api/v1/initial-setup")
+    .then((response) => response.json())
+    .then((jsondata) => { 
+      setMainEvent(jsondata.data);
+    })
+      .catch(err => console.error(err));
+};
+ //get list of tags
+ const getTags = () => {
+  fetch("https://qvik.herokuapp.com/api/v1/tags")
+    .then((response) => response.json())
+    .then((jsondata) => { 
+      setTags(jsondata.data);
+    })
+      .catch(err => console.error(err));
+};
+
+
 //update event
 const updateEvent = (event, id) => {
     console.log('stingify', JSON.safeStringify(event))
