@@ -130,11 +130,11 @@ export function Event() {
           <Form.Group>
             <Col xs="auto">
               <Form.Label> All Tags: </Form.Label>
-              {allTags.map((tag, index) => (
+              {
+              allTags && allTags.map((tag, index) => (
                 <div key={index} className="mb-3" style={{ marginLeft: 20 }}>
                   <Form.Check
                     type="checkbox"
-                    id="default-checkbox"
                     label={tag}
                   />
                 </div>
@@ -144,12 +144,11 @@ export function Event() {
           <Form.Group>
             <Col xs="auto">
               <Form.Label> Selected Common Tags: </Form.Label>
-              {parentTags.map((tag, index) => (
+              {parentTags && parentTags.map((tag, index) => (
                 <div key={index} className="mb-3" style={{ marginLeft: 20 }}>
                   <Form.Check
                     disabled
                     type="checkbox"
-                    id="disabled-default-checkbox"
                     label={tag}
                   />
                 </div>

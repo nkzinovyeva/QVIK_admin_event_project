@@ -34,7 +34,7 @@ function Events() {
       {headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
       {headerName: "", 
           field: "", 
-          cellRendererFramework: params => <EditEvent event={params.data} /> 
+          cellRendererFramework: (params, index) => <EditEvent key={index} event={params.data} /> 
       },
       {headerName: "", 
           field: "", 
