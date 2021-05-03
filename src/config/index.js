@@ -7,5 +7,5 @@ export const STAGES_URL = 'https://qvik.herokuapp.com/api/v1/stages';
 export const VENUES_URL = 'https://qvik.herokuapp.com/api/v1/venues';
 export const IMAGES_URL = 'https://qvik.herokuapp.com/api/v1/images/';
 export const UPDATE_URL = 'https://qvik.herokuapp.com/api/v1/last-update';
-export const LINK_EVENT_STAGE_URL = 'https://qvik.herokuapp.com/api/v1/link-event-stage/';
-export const LINK_EVENT_PRESENTER_URL = 'https://qvik.herokuapp.com/api/v1/link-event-presenter/';
+export const LINK_EVENT_STAGE_URL = 'https://qvik.herokuapp.com/api/v1/link-event-stage';
+export const LINK_EVENT_PRESENTER_URL = 'https://qvik.herokuapp.com/api/v1/link-event-presenter';

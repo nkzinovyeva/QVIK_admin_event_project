@@ -158,7 +158,7 @@ export function Event() {
         </Form.Row>
         <Button variant="outline-primary" size="sm">
           {" "}
-          Select common tag{" "}
+          Select as a common tag{" "}
         </Button>{" "}
         <Button variant="outline-primary" size="sm">
           {" "}

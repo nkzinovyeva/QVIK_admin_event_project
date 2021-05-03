@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Modal, Form, Col, Button, Row } from 'react-bootstrap';
+import { Modal, Form, Col, Button, } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { editEvent } from '../../redux/actions/events';
 import { linkEventPresenter, linkEventStage } from '../../redux/actions/links'
@@ -47,7 +47,7 @@ export default function EditEvent(props) {
   const handleEdit = () => {
     dispatch(editEvent(event, event.eventId))
     dispatch(linkEventPresenter(event.eventId, presenter.presenterId))
-    dispatch(linkEventStage(stage.stageId, event.eventId))
+    dispatch(linkEventStage(event.eventId, stage.stageId ))
     handleClose();
   }
   
@@ -71,6 +71,14 @@ export default function EditEvent(props) {
     }
     setValidated(true);
   };
+
+  const handleAddPresenter = () => {
+    dispatch(linkEventPresenter(event.eventId, presenter.presenterId))
+  }
+
+  const handleAddStage = () => {
+    dispatch(linkEventStage(event.eventId, stage.stageId))
+  }
 
   const fromDate = useState(props.event.startDate);
 
@@ -106,9 +114,10 @@ export default function EditEvent(props) {
                   maxLength={30}
                   required
                 />
-                 <Form.Text muted>
-                 The title must be no more than 30 characters long. 
-                 Choose a short and succinct name that accurately reflects the essence of the event.
+                <Form.Text muted>
+                  The title must be no more than 30 characters long. Choose a
+                  short and succinct name that accurately reflects the essence
+                  of the event.
                 </Form.Text>
                 <Form.Control.Feedback type="invalid">
                   This field can't be empty.
@@ -127,8 +136,9 @@ export default function EditEvent(props) {
                   required
                 />
                 <Form.Text muted>
-                 Short description must be no more than 120 characters long. 
-                 Describe the event in a few words, choosing succinct and precise expressions.
+                  Short description must be no more than 120 characters long.
+                  Describe the event in a few words, choosing succinct and
+                  precise expressions.
                 </Form.Text>
                 <Form.Control.Feedback type="invalid">
                   This field can't be empty.
@@ -245,6 +255,13 @@ export default function EditEvent(props) {
                   <Form.Control.Feedback type="invalid">
                     This field can't be empty.
                   </Form.Control.Feedback>
+                  <Button
+                    variant="outline-secondary"
+                    size="sm"
+                    onClick={handleAddStage}
+                  >
+                    Save
+                  </Button>
                 </Form.Group>
               </Form.Row>
               <Form.Row>
@@ -280,6 +297,13 @@ export default function EditEvent(props) {
                   <Form.Control.Feedback type="invalid">
                     This field can't be empty.
                   </Form.Control.Feedback>
+                  <Button
+                    variant="outline-secondary"
+                    size="sm"
+                    onClick={handleAddPresenter}
+                  >
+                    Save
+                  </Button>
                 </Form.Group>
               </Form.Row>
               <Button type="submit"> Update </Button>{" "}

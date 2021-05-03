@@ -54,8 +54,8 @@ export default function AddEvent(props) {
     const handleAdd = () => {
       console.log("adding event"); 
       dispatch(addEvent(event))
-      dispatch(linkEventPresenter(event.eventId, presenter.presenterId))
-      dispatch(linkEventStage(event.eventId, stage.stageId))
+      //dispatch(linkEventPresenter(presenter.presenterId, event.eventId))
+     // dispatch(linkEventStage(event.eventId, stage.stageId))
       handleClose();
     }
 
