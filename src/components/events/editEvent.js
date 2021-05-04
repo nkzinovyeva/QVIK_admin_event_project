@@ -151,7 +151,6 @@ export default function EditEvent(props) {
                     size="sm"
                     type="date"
                     name="startDate"
-                    minDate={"2021-05-19T12:00:00.000Z"}
                     label="start Date"
                     value={event.startDate}
                     onChange={handleInputChange}
