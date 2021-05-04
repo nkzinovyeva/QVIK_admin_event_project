@@ -1,12 +1,14 @@
-import { GET_EVENTS, ADD_EVENT, DELETE_EVENT, EDIT_EVENT } from '../actions/types';
+import { GET_EVENTS, ADD_EVENT, DELETE_EVENT, EDIT_EVENT, GET_MAIN_EVENT } from '../actions/types';
 
 const initialState = {
     events: [],
-    mainEvent: []
+    mainEvent: {}
 }
 
 const eventReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_MAIN_EVENT:
+            return { ...state, mainEvent: action.payload };
         case GET_EVENTS:
             return { ...state, events: action.payload };
         case ADD_EVENT:

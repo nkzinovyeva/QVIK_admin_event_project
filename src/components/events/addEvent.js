@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStages } from '../../redux/actions/stages';
 import { getPresenters } from '../../redux/actions/presenters';
 import { addEvent } from '../../redux/actions/events';
-import { linkEventPresenter,linkEventStage } from '../../redux/actions/links';
+import { linkEventPresenter, linkEventStage } from '../../redux/actions/links';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -54,8 +54,8 @@ export default function AddEvent(props) {
     const handleAdd = () => {
       console.log("adding event"); 
       dispatch(addEvent(event))
-      dispatch(linkEventPresenter(event, presenter))
-      dispatch(linkEventStage(event, stage))
+      //dispatch(linkEventPresenter(presenter.presenterId, event.eventId))
+     // dispatch(linkEventStage(event.eventId, stage.stageId))
       handleClose();
     }
 
@@ -75,8 +75,8 @@ export default function AddEvent(props) {
 
     return (
       <>
-        <Button variant="light" className={"ml-3 mr-3"} onClick={handleShow}>
-          Add Event
+        <Button variant="outline-primary" onClick={handleShow}>
+          Add Sub-Event
         </Button>
 
         <Modal
@@ -98,8 +98,13 @@ export default function AddEvent(props) {
                   label="title"
                   value={event.title}
                   onChange={handleInputChange}
+                  maxLength={30}
                   required
                 />
+                <Form.Text muted>
+                 The title must be no more than 30 characters long. 
+                 Choose a short and succinct name that accurately reflects the essence of the event.
+                </Form.Text>
                 <Form.Control.Feedback type="invalid">
                   This field can't be empty.
                 </Form.Control.Feedback>
@@ -112,8 +117,13 @@ export default function AddEvent(props) {
                   value={event.shortDescription}
                   onChange={handleInputChange}
                   label="short Description"
+                  maxLength={120}
                   required
                 />
+                <Form.Text muted>
+                 Short description must be no more than 120 characters long. 
+                 Describe the event in a few words, choosing succinct and precise expressions.
+                </Form.Text>
                 <Form.Control.Feedback type="invalid">
                   This field can't be empty.
                 </Form.Control.Feedback>

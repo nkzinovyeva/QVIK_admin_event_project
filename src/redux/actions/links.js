@@ -8,11 +8,20 @@ import {
 export const linkEventPresenter = (event, presenter) => {
     try {
         return async dispatch => {
-            await axios.post(`${LINK_EVENT_PRESENTER_URL}`, event, presenter)
+            await axios({
+                method: 'post',
+                url: `${LINK_EVENT_PRESENTER_URL}`,
+                headers: { 'accept': 'application/json', 'operation': 'CREATE', 'Content-Type': 'application/json'},
+                data: {
+                    sourceId: event,
+                    destinationId: presenter
+                }
+              })
+            //await axios.post(`${LINK_EVENT_PRESENTER_URL}`, presenter, event)
                 .then(response => {
                     dispatch({
                         type: LINK_PRESENTER,
-                        payload: event, presenter
+                        payload: response
                     });
                 });
         };
@@ -23,11 +32,20 @@ export const linkEventPresenter = (event, presenter) => {
 export const linkEventStage = (event, stage) => {
     try {
         return async dispatch => {
-            await axios.post(`${LINK_EVENT_STAGE_URL}`, event, stage)
+            await axios({
+                method: 'post',
+                url: `${LINK_EVENT_STAGE_URL}`,
+                headers: { 'accept': 'application/json', 'operation': 'CREATE', 'Content-Type': 'application/json'},
+                data: {
+                    sourceId: event,
+                    destinationId: stage
+                }
+              })
+            //await axios.post(`${LINK_EVENT_STAGE_URL}`, event, stage)
                 .then(response => {
                     dispatch({
                         type: LINK_STAGE,
-                        payload: event, stage
+                        payload: response
                     });
                 });
         };

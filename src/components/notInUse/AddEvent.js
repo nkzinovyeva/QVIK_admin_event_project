@@ -73,7 +73,7 @@ function AddEvent(props) {
                         color="primary" 
                         size="small" 
                         aria-label="Add a new subevent" 
-                        onClick={handleClickOpen} > Add subevent
+                        onClick={handleClickOpen} >Add subevent
                 <AddIcon />  
             </IconButton> 
         </Tooltip>

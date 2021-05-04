@@ -1,14 +1,28 @@
 import axios from 'axios';
-import { GET_EVENTS, ADD_EVENT, DELETE_EVENT, EDIT_EVENT } from './types';
+import { GET_EVENTS, ADD_EVENT, DELETE_EVENT, EDIT_EVENT, GET_MAIN_EVENT } from './types';
 import {
     SETUP_URL,
     EVENTS_URL,
-    RESTAURANT_URL,
-    PRESENTERS_URL,
-    STAGES_URL,
-    VENUES_URL,
-    UPDATE_URL
   } from '../../config';
+
+  export const getMainEvent = () => {
+    try {
+        return async dispatch => {
+          const response = await axios.get(`${SETUP_URL}`);
+          console.log('initial', response.data.data )
+          if (response.data) {
+            dispatch({
+              type: GET_MAIN_EVENT,
+              payload: response.data.data
+            });
+          } else {
+            console.log('Unable to fetch data from the API !');
+          }
+        }
+    } catch (error) {
+        console.log(error);
+      }
+};
 
 export const getEvents = () => {
     try {

@@ -1,3 +1,4 @@
+export const GET_MAIN_EVENT = 'GET_MAIN_EVENT';
 export const GET_EVENTS = 'GET_EVENTS';
 export const EDIT_EVENT = 'EDIT_EVENT';
 export const ADD_EVENT = 'ADD_EVENT';
