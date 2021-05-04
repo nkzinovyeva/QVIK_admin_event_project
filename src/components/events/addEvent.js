@@ -74,7 +74,7 @@ export default function AddEvent(props) {
     };
 
     return (
-      <>4
+      <>
         <Button variant="light" className={"ml-3 mr-3"} onClick={handleShow}>
           Add Event
         </Button>
