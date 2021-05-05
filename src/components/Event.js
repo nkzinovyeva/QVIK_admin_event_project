@@ -68,7 +68,6 @@ export function Event() {
               size="sm"
               type="date"
               name="startDate"
-              minDate={"2021-05-19T12:00:00.000Z"}
               label="start Date"
               value={mainEvent.startDate}
               onChange={handleInputChange}
