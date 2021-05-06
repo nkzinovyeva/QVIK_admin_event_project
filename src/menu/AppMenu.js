@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from "react-redux";
 import { getEvents } from '../redux/actions/events';
+import { getStages } from '../redux/actions/stages';
 import List from '@material-ui/core/List';
 import AppMenuItem from './AppMenuItem';
 
@@ -10,8 +11,12 @@ const AppMenu = (props) => {
   const [restaurants, setRestaurants] = useState([]);
 
   const events = useSelector(state => state.eventReducer.events)
+
+  const stages = useSelector(state => state.stageReducer.stages);
+
   const dispatch = useDispatch();
   const fetchEvents = () => dispatch(getEvents());
+  const fetchStages = () => dispatch(getStages());
 
   const appMenuItems = [
     {
@@ -31,12 +36,19 @@ const AppMenu = (props) => {
       items: events.map(event => {
         return { name: event.title, type: 'event', data: event }
       })
+    },{
+      name: 'Stages',
+      link: '/stages',
+      items: stages.map(stage => {
+        return { name: stage.name, type: 'stage', data: stage }
+      })
     },
   ]
 
   useEffect(() => {
     fetchEvents();
     getRestaurants();
+    fetchStages();
   }, []);
 
  

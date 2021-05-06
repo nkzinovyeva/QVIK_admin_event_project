@@ -48,6 +48,18 @@ const AppMenuItemComponent = props => {
     )
   }
 
+  if (type === "stage") {
+    return (
+      <ListItem
+        button
+        className={className} 
+        onClick={onClick}
+        >
+        <ListItemText children={children} />
+      </ListItem>
+    )
+  }
+
   // Return a LitItem with a link component
   return (
     <ListItem

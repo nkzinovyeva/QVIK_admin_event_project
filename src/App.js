@@ -11,6 +11,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Home from './components/Home';
 import PageEvents from './components/Events';
 import PageRestaurants from './components/Restaurants';
+import PageStages from './components/Stages';
 import AppMenu from './menu/AppMenu'
 
 function ResponsiveDrawer(props) {
@@ -79,6 +80,7 @@ function ResponsiveDrawer(props) {
                   <Route path="/" exact component={Home} />
                   <Route path="/restaurants" component={PageRestaurants} />
                   <Route path="/events" component={PageEvents} />
+                  <Route path="/stages" component={PageStages} />
                 </Switch>
             </Container>
           </main>
