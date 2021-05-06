@@ -36,7 +36,7 @@ function Presenters() {
       },
       {headerName: "", 
           field: "", 
-          //cellRendererFramework: params => <DeletePresenter presenter={params.data} />
+          cellRendererFramework: params => <DeletePresenter presenter={params.data} />
       }
   ];
 
