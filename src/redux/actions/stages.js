@@ -22,4 +22,21 @@ export const getStages = () => {
         console.log(error);
       }
 };
+
+export const editStage = (stage, id) => {
+  let url = `${STAGES_URL}`+'/' + id;
+  try {
+      return async dispatch => {
+          await axios.put(url, stage)
+              .then(response => {
+                  dispatch({
+                      type: EDIT_STAGE,
+                      payload: response
+                  });
+              });
+      };
+  } catch (error) {
+      console.log(error);
+  }
+};
  

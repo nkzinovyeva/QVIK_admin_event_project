@@ -4,6 +4,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { NavLink  } from 'react-router-dom'
 import EditEvent from "../components/events/editEvent";
+import EditStage from "../components/stages/editStage";
 
 const AppMenuItemComponent = props => {
   const { className, onClick, link, children, type, data } = props;
@@ -56,6 +57,9 @@ const AppMenuItemComponent = props => {
         onClick={onClick}
         >
         <ListItemText children={children} />
+        <ListItemIcon>
+            <EditStage stage={data} />
+          </ListItemIcon>
       </ListItem>
     )
   }

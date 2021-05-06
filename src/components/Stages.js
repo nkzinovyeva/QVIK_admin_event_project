@@ -4,7 +4,7 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getStages } from '../redux/actions/stages';
-
+import EditStage from "./stages/editStage";
 
 function Stages() {
 
@@ -26,11 +26,11 @@ function Stages() {
       {headerName: "Name", field: "name", sortable: true, filter: true, resizable: true },
       {headerName: "Location", field: "location", sortable: true, filter: true, resizable: true },
       {headerName: "Capacity", field: "capacity", sortable: true, filter: true, resizable: true },
-      /*{headerName: "", 
-          field: "", 
-          cellRendererFramework: (params, index) => <EditEvent key={index} event={params.data} /> 
-      },
       {headerName: "", 
+          field: "", 
+          cellRendererFramework: (params, index) => <EditStage key={index} stage={params.data} /> 
+      },
+      /*{headerName: "", 
           field: "", 
           cellRendererFramework: params => <DeleteEvent event={params.data} />
       }*/

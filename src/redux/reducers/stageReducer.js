@@ -11,7 +11,7 @@ const stageReducer = (state = initialState, action) => {
         case ADD_STAGE:
             return { ...state,  };
         case EDIT_STAGE:
-            return { ...state,  };
+            return { ...state, stages: action.payload  };
         case DELETE_STAGE:
             return { ...state,  };
         default:
