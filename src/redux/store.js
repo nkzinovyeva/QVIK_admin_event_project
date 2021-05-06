@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
+import logger from 'redux-logger'
 import thunk from 'redux-thunk';
 import eventReducer from './reducers/eventReducer';
 import stageReducer from './reducers/stageReducer';
@@ -12,6 +13,6 @@ const rootReducer = combineReducers({
   linkReducer: linkReducer
 })
 
-const configureStore = () => createStore(rootReducer, applyMiddleware(thunk));
+const configureStore = () => createStore(rootReducer, applyMiddleware(thunk, logger));
 
 export default configureStore;

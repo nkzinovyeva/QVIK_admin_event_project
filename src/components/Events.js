@@ -45,6 +45,7 @@ function Events() {
     return  (
       mainEvent ? 
       <div style={{marginLeft: '150px'}}>
+        <h3>Events</h3>
         <Event />
         <h3>Sub-events</h3>
         <AddEvent />

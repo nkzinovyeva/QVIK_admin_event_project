@@ -24,7 +24,7 @@ export const getStages = () => {
 };
 
 export const editStage = (stage, id) => {
-  let url = `${STAGES_URL}`+'/' + id;
+  let url = `${STAGES_URL}` + '/' + id;
   try {
       return async dispatch => {
           await axios.put(url, stage)

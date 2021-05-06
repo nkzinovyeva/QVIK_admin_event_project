@@ -3,21 +3,23 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getStages } from '../redux/actions/stages';
-import EditStage from "./stages/editStage";
-import AddStage from "./stages/addStage";
-import DeleteStage from "./stages/deleteStage";
+import { getPresenters, addPresenter } from '../redux/actions/presenters';
+import EditPresenter from "./presenters/editPresenter";
+import AddPresenter from "./presenters/addPresenter";
+import DeletePresenter from "./presenters/deletePresenter";
 
-function Stages() {
+function Presenters() {
 
   const gridRef = useRef();
-  const stages = useSelector(state => state.stageReducer.stages)
+  const presenters = useSelector(state => state.presenterReducer.presenters)
   const dispatch = useDispatch();
-  const fetchStages = () => dispatch(getStages());
+  const fetchPresenters = () => dispatch(getPresenters());
+  const addOnePresenter = (presenter) => dispatch(addPresenter(presenter));
 
   useEffect(() => {
     const fetchData = async () => {
-      fetchStages()
+        fetchPresenters()
+        addOnePresenter()
     } 
     fetchData()
   }, []) 
@@ -26,22 +28,22 @@ function Stages() {
   //set columns for the table
   const columns = [
       {headerName: "Name", field: "name", sortable: true, filter: true, resizable: true },
-      {headerName: "Location", field: "location", sortable: true, filter: true, resizable: true },
-      {headerName: "Capacity", field: "capacity", sortable: true, filter: true, resizable: true },
+      {headerName: "contact", field: "contact", sortable: true, filter: true, resizable: true },
+      {headerName: "ShortDescription", field: "shortDescription", sortable: true, filter: true, resizable: true },
       {headerName: "", 
           field: "", 
-          cellRendererFramework: (params, index) => <EditStage key={index} stage={params.data} /> 
+          cellRendererFramework: (params, index) => <EditPresenter key={index} presenter={params.data} /> 
       },
       {headerName: "", 
           field: "", 
-          //cellRendererFramework: params => <DeleteStage stage={params.data} />
+          cellRendererFramework: params => <DeletePresenter presenter={params.data} />
       }
   ];
 
     return  (
       <div style={{marginLeft: '150px'}}>
-        <h3>Stages</h3>
-        <AddStage />
+        <h3>Hosts</h3>
+        <AddPresenter addPresenter={addOnePresenter} />
           <div style ={{height: "700px", width: "95%", margin: "auto"}}>
                 <AgGridReact 
                     ref = {gridRef}
@@ -52,7 +54,7 @@ function Stages() {
                     }}
                     columnDefs = {columns}
                     suppressCellSelection = {true}
-                    rowData = {stages}
+                    rowData = {presenters}
                     pagination = {true}
                     paginationPageSize = {10}
                 >
@@ -62,4 +64,4 @@ function Stages() {
       )
     }
 
-export default Stages;
+export default Presenters;

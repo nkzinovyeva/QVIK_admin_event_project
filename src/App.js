@@ -12,6 +12,7 @@ import Home from './components/Home';
 import PageEvents from './components/Events';
 import PageRestaurants from './components/Restaurants';
 import PageStages from './components/Stages';
+import PagePresenters from './components/Presenters';
 import AppMenu from './menu/AppMenu'
 
 function ResponsiveDrawer(props) {
@@ -81,6 +82,7 @@ function ResponsiveDrawer(props) {
                   <Route path="/restaurants" component={PageRestaurants} />
                   <Route path="/events" component={PageEvents} />
                   <Route path="/stages" component={PageStages} />
+                  <Route path="/presenters" component={PagePresenters} />
                 </Switch>
             </Container>
           </main>

@@ -22,3 +22,54 @@ export const getPresenters = () => {
         console.log(error);
       }
 };
+
+export const editPresenter = (presenter, id) => {
+  let url = `${PRESENTERS_URL}` + '/' + id;
+  try {
+      return async dispatch => {
+          await axios.put(url, presenter)
+              .then(response => {
+                  dispatch({
+                      type: EDIT_PRESENTER,
+                      payload: response
+                  });
+              });
+      };
+  } catch (error) {
+      console.log(error);
+  }
+};
+
+export const addPresenter = (presenter) => {
+  try {
+      return async dispatch => {
+          await axios.post(`${PRESENTERS_URL}`, presenter)
+              .then(response => {
+                  dispatch({
+                      headers: { 'accept': 'application/json', 'operation': 'CREATE', 'Content-Type': 'application/json'},
+                      type: ADD_PRESENTER,
+                      payload: presenter
+                  });
+              });
+      };
+  } catch (error) {
+      console.log(error);
+  }
+};
+
+export const deletePresenter = (id) => {
+  let url = `${PRESENTERS_URL}` + '/' + id;
+  try {
+      return async dispatch => {
+          await axios.delete(url)
+              .then(response => {
+                  dispatch({
+                      type: DELETE_PRESENTER,
+                      payload: id
+                  });
+              });
+      };
+  } catch (error) {
+      console.log(error);
+  }
+};
