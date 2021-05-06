@@ -9,7 +9,7 @@ const stageReducer = (state = initialState, action) => {
         case GET_STAGES:
             return { ...state, stages: action.payload };
         case ADD_STAGE:
-            return { ...state,  };
+            return { ...state, stages: [...state.stages, action.payload]  };
         case EDIT_STAGE:
             return { ...state, stages: action.payload  };
         case DELETE_STAGE:

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
-import { deleteEvent } from '../../redux/actions/events';
+import { deleteStage } from '../../redux/actions/stages';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -9,7 +9,7 @@ const DeleteEvent = (props) => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteEvent(props.event.eventId));
+    dispatch(deleteStage(props.stage.stageId));
     handleClose();
   };
 
@@ -33,7 +33,7 @@ const DeleteEvent = (props) => {
           <Modal.Title>Confirm your action: </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>You are going to delete {props.event.title}</p>
+          <p>You are going to delete {props.stage.name}</p>
         </Modal.Body>
         <Modal.Footer>
           <Form onSubmit={handleDelete}>

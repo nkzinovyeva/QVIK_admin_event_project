@@ -40,3 +40,36 @@ export const editStage = (stage, id) => {
   }
 };
  
+export const addStage = (stage) => {
+  try {
+      return async dispatch => {
+          await axios.post(`${STAGES_URL}`, stage)
+              .then(response => {
+                  dispatch({
+                      headers: { 'accept': 'application/json', 'operation': 'CREATE', 'Content-Type': 'application/json'},
+                      type: ADD_STAGE,
+                      payload: stage
+                  });
+              });
+      };
+  } catch (error) {
+      console.log(error);
+  }
+};
+
+export const deleteStage = (id) => {
+  let url = `${STAGES_URL}` +'/' + id;
+  try {
+      return async dispatch => {
+          await axios.delete(url)
+              .then(response => {
+                  dispatch({
+                      type: DELETE_STAGE,
+                      payload: id
+                  });
+              });
+      };
+  } catch (error) {
+      console.log(error);
+  }
+};

@@ -5,6 +5,8 @@ import "ag-grid-community/dist/styles/ag-theme-material.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getStages } from '../redux/actions/stages';
 import EditStage from "./stages/editStage";
+import AddStage from "./stages/addStage";
+import DeleteStage from "./stages/deleteStage";
 
 function Stages() {
 
@@ -30,15 +32,16 @@ function Stages() {
           field: "", 
           cellRendererFramework: (params, index) => <EditStage key={index} stage={params.data} /> 
       },
-      /*{headerName: "", 
+      {headerName: "", 
           field: "", 
-          cellRendererFramework: params => <DeleteEvent event={params.data} />
-      }*/
+          cellRendererFramework: params => <DeleteStage stage={params.data} />
+      }
   ];
 
     return  (
       <div style={{marginLeft: '150px'}}>
         <h3>Stages</h3>
+        <AddStage />
           <div style ={{height: "700px", width: "95%", margin: "auto"}}>
                 <AgGridReact 
                     ref = {gridRef}
