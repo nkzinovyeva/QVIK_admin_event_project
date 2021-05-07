@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getEvents } from '../redux/actions/events';
 import { getStages } from '../redux/actions/stages';
 import { getPresenters } from '../redux/actions/presenters';
+import { getRestaurants } from '../redux/actions/restaurants';
 import List from '@material-ui/core/List';
 import AppMenuItem from './AppMenuItem';
 
 const AppMenu = (props) => {
   const classes = useStyles()
-  const [restaurants, setRestaurants] = useState([]);
+  //const [restaurants, setRestaurants] = useState([]);
 
   const events = useSelector(state => state.eventReducer.events)
 
@@ -17,11 +18,13 @@ const AppMenu = (props) => {
 
   const presenters = useSelector(state => state.presenterReducer.presenters)
 
+  const restaurants = useSelector(state => state.restaurantReducer.restaurants);
 
   const dispatch = useDispatch();
   const fetchEvents = () => dispatch(getEvents());
   const fetchStages = () => dispatch(getStages());
   const fetchPresenters = () => dispatch(getPresenters());
+  const fetchRestaurants = () => dispatch(getRestaurants());
 
   const appMenuItems = [
     {
@@ -59,20 +62,10 @@ const AppMenu = (props) => {
 
   useEffect(() => {
     fetchEvents();
-    getRestaurants();
+    fetchRestaurants();
     fetchStages();
     fetchPresenters();
   }, []);
-
- 
-  const getRestaurants = () => {
-    fetch("https://qvik.herokuapp.com/api/v1/restaurants")
-      .then((response) => response.json())
-      .then((jsondata) => {
-        setRestaurants(jsondata.data.restaurants);
-      })
-      .catch(err => console.error(err));
-  };
 
   return (
     <List component="nav" className={classes.appMenu} disablePadding>
