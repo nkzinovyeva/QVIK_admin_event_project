@@ -9,12 +9,12 @@ export default function AddStage() {
   const dispatch = useDispatch();
 
   const [stage, setStage] = useState({
-    stageId: "",
+    //stageId: "",
     name: "",
     location: "",
     capacity: "",
     type: "",
-    venue: {
+    /*venue: {
           venueId: 10,
           name: "Suvilahti"
         },
@@ -27,7 +27,7 @@ export default function AddStage() {
             endTime: "13:00:00",
             title: "Art Business"
           }
-        ]
+        ]*/
   });
 
   const [show, setShow] = useState(false);
