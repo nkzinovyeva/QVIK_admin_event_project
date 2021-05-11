@@ -34,7 +34,7 @@ function Stages() {
       },
       {headerName: "", 
           field: "", 
-          //cellRendererFramework: params => <DeleteStage stage={params.data} />
+          cellRendererFramework: params => <DeleteStage stage={params.data} />
       }
   ];
 

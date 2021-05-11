@@ -27,7 +27,7 @@ export const editStage = (stage, id) => {
   let url = `${STAGES_URL}` + '/' + id;
   try {
       return async dispatch => {
-          await axios.put(url, stage)
+          await axios.put(url, {"stage": stage })
               .then(response => {
                   dispatch({
                       type: EDIT_STAGE,
@@ -46,7 +46,7 @@ export const addStage = (stage) => {
           await axios.post(`${STAGES_URL}`, stage)
               .then(response => {
                   dispatch({
-                      headers: { 'accept': 'application/json', 'operation': 'CREATE', 'Content-Type': 'application/json'},
+                      //headers: { 'accept': 'application/json', 'operation': 'CREATE', 'Content-Type': 'application/json'},
                       type: ADD_STAGE,
                       payload: stage
                   });
