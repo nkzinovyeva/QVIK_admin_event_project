@@ -27,7 +27,7 @@ function Restaurants() {
   const columns = [
     //{headerName: "Id", field: "restaurantId", sortable: true, filter: true, resizable: true },
     {headerName: "Name", field: "name", sortable: true, filter: true, resizable: true },
-    {headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
+    //{headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
     {
       headerName: "",
       field: "",
@@ -41,10 +41,10 @@ function Restaurants() {
   ];
 
   return(
-    <div style={{marginLeft: '150px'}}>
-    <h1>Restaurants page</h1>
+    <div >
+    <h3>Restaurants</h3>
     <AddRestaurant />
-    <div style ={{height: "700px", width: "95%", margin: "auto"}}>
+    <div style ={{height: "700px", width: "95%" , margin: "auto"}}>
           <AgGridReact 
               ref = {gridRef}
               onGridReady = { params => {

@@ -31,7 +31,7 @@ function Events() {
   //set columns for the table
   const columns = [
       {headerName: "Title", field: "title", sortable: true, filter: true, resizable: true },
-      {headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
+      //{headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
       {headerName: "", 
           field: "", 
           cellRendererFramework: (params, index) => <EditEvent key={index} event={params.data} /> 
@@ -44,12 +44,12 @@ function Events() {
 
     return  (
       mainEvent ? 
-      <div style={{marginLeft: '150px'}}>
+      <div >
         <h3>Events</h3>
         <Event />
         <h3>Sub-events</h3>
         <AddEvent />
-          <div style ={{height: "700px", width: "95%", margin: "auto"}}>
+          <div style ={{height: "700px", width: "95%" , margin: "auto"}}>
                 <AgGridReact 
                     ref = {gridRef}
                     onGridReady = { params => {

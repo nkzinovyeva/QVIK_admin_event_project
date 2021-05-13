@@ -26,8 +26,8 @@ function Stages() {
   //set columns for the table
   const columns = [
       {headerName: "Name", field: "name", sortable: true, filter: true, resizable: true },
-      {headerName: "Location", field: "location", sortable: true, filter: true, resizable: true },
-      {headerName: "Capacity", field: "capacity", sortable: true, filter: true, resizable: true },
+      //{headerName: "Location", field: "location", sortable: true, filter: true, resizable: true },
+      //{headerName: "Capacity", field: "capacity", sortable: true, filter: true, resizable: true },
       {headerName: "", 
           field: "", 
           cellRendererFramework: (params, index) => <EditStage key={index} stage={params.data} /> 
@@ -39,10 +39,10 @@ function Stages() {
   ];
 
     return  (
-      <div style={{marginLeft: '150px'}}>
+      <div >
         <h3>Stages</h3>
         <AddStage />
-          <div style ={{height: "700px", width: "95%", margin: "auto"}}>
+          <div style ={{height: "700px", width: "95%" , margin: "auto"}}>
                 <AgGridReact 
                     ref = {gridRef}
                     onGridReady = { params => {

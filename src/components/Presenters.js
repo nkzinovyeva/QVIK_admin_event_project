@@ -26,8 +26,8 @@ function Presenters() {
   //set columns for the table
   const columns = [
       {headerName: "Name", field: "name", sortable: true, filter: true, resizable: true },
-      {headerName: "contact", field: "contact", sortable: true, filter: true, resizable: true },
-      {headerName: "ShortDescription", field: "shortDescription", sortable: true, filter: true, resizable: true },
+      //{headerName: "contact", field: "contact", sortable: true, filter: true, resizable: true },
+      //{headerName: "ShortDescription", field: "shortDescription", sortable: true, filter: true, resizable: true },
       {headerName: "", 
           field: "", 
           cellRendererFramework: (params, index) => <EditPresenter key={index} presenter={params.data} /> 
@@ -39,10 +39,10 @@ function Presenters() {
   ];
 
     return  (
-      <div style={{marginLeft: '150px'}}>
+      <div >
         <h3>Hosts</h3>
         <AddPresenter />
-          <div style ={{height: "700px", width: "95%", margin: "auto"}}>
+          <div style ={{height: "700px", width: "95%" , margin: "auto"}}>
                 <AgGridReact 
                     ref = {gridRef}
                     onGridReady = { params => {
