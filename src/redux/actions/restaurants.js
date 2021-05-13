@@ -23,7 +23,7 @@ export const getRestaurants = () => {
 export const addRestaurant = (rest) => {
     try {
         return async dispatch => {
-            await axios.post(`${RESTAURANT_URL}`, rest)
+            await axios.post(`${RESTAURANT_URL}`, {"restaurant": rest })
                 .then(response => {
                     dispatch({
                         headers: { 'accept': 'application/json', 'operation': 'CREATE', 'Content-Type': 'application/json' },
@@ -42,7 +42,7 @@ export const editRestaurant = (rest, id) => {
     console.log('edit', rest);
     try {
         return async dispatch => {
-            await axios.put(url, rest)
+            await axios.put(url, {"restaurant": rest })
                 .then(response => {
                     dispatch({
                         type: EDIT_RESTAURANT,

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStages } from '../../redux/actions/stages';
 import { getPresenters } from '../../redux/actions/presenters';
 import { addEvent } from '../../redux/actions/events';
-import { linkEventPresenter, linkEventStage } from '../../redux/actions/links';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,8 +17,10 @@ export default function AddEvent(props) {
         endTime: "",
         title: "",
         shortDescription: "",
-        fullDescription: ""
+        fullDescription: "",
+        active: true
       });
+
     //For the stage list
     const stagesList = useSelector(state => state.stageReducer.stages)
     const fetchStages = () => dispatch(getStages());
@@ -53,9 +54,7 @@ export default function AddEvent(props) {
 
     const handleAdd = () => {
       console.log("adding event"); 
-      dispatch(addEvent(event))
-      //dispatch(linkEventPresenter(presenter.presenterId, event.eventId))
-     // dispatch(linkEventStage(event.eventId, stage.stageId))
+      dispatch(addEvent(event, presenter, stage))
       handleClose();
     }
 

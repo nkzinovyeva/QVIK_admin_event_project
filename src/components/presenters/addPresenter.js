@@ -5,8 +5,8 @@ import { addPresenter } from "../../redux/actions/presenters";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function AddPresenter(props) {
-  //const dispatch = useDispatch();
+export default function AddPresenter() {
+  const dispatch = useDispatch();
 
   const [presenter, setPresenter] = useState({
     name: "",
@@ -25,8 +25,7 @@ export default function AddPresenter(props) {
   };
 
   const handleAdd = () => {
-    //dispatch(addPresenter(presenter));
-    props.addPresenter(presenter)
+    dispatch(addPresenter(presenter));
     handleClose();
   };
 

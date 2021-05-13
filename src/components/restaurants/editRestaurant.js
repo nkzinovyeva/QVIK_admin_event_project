@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Form, Col, Button, } from 'react-bootstrap';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { editRestaurant } from '../../redux/actions/restaurants';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,7 +8,6 @@ export default function EditRestaurant(props) {
     
   const [restaurant, setRestaurant] = useState({});
   const dispatch = useDispatch();
-  //const editOneEvent = (event, id) => dispatch(editEvent(event, id));
 
   useEffect(() => {
     setRestaurant({

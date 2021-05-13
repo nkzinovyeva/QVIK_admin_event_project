@@ -46,7 +46,6 @@ export const addPresenter = (presenter) => {
           await axios.post(`${PRESENTERS_URL}`, presenter)
               .then(response => {
                   dispatch({
-                      //headers: { 'accept': 'application/json', 'operation': 'CREATE', 'Content-Type': 'application/json'},
                       type: ADD_PRESENTER,
                       payload: presenter
                   });

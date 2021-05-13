@@ -25,7 +25,7 @@ function Restaurants() {
 
   //set columns for the table
   const columns = [
-    {headerName: "Id", field: "restaurantId", sortable: true, filter: true, resizable: true },
+    //{headerName: "Id", field: "restaurantId", sortable: true, filter: true, resizable: true },
     {headerName: "Name", field: "name", sortable: true, filter: true, resizable: true },
     {headerName: "Short description", field: "shortDescription", sortable: true, filter: true, resizable: true },
     {

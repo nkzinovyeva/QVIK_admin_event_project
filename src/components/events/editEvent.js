@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { Modal, Form, Col, Button, } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { editEvent } from '../../redux/actions/events';
-import { linkEventPresenter, linkEventStage } from '../../redux/actions/links'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,7 +11,6 @@ export default function EditEvent(props) {
     const presentersList = useSelector(state => state.presenterReducer.presenters)
     const [event, setEvent] = useState({});
     const dispatch = useDispatch();
-    //const editOneEvent = (event, id) => dispatch(editEvent(event, id));
     
     useEffect(() => {
         setEvent({
@@ -25,8 +23,8 @@ export default function EditEvent(props) {
             shortDescription: props.event.shortDescription,
             fullDescription: props.event.fullDescription,
             stage: props.event.stage.name,
-            active: props.event.active,
-            mainEvent: props.event.mainEvent
+            active: props.event.stage.name,
+            //mainEvent: props.event.mainEvent
         });
     }, []);
 
@@ -46,8 +44,6 @@ export default function EditEvent(props) {
 
   const handleEdit = () => {
     dispatch(editEvent(event, event.eventId, presenter, stage))
-    //dispatch(linkEventPresenter(event.eventId, presenter.presenterId))
-    //dispatch(linkEventStage(event.eventId, stage.stageId ))
     handleClose();
   }
   
@@ -72,11 +68,6 @@ export default function EditEvent(props) {
     }
     setValidated(true);
   };
-
-  const fromDate = useState(props.event.startDate);
-
-  const [toDate, setToDate] = useState("");
-
 
     return (
       <>

@@ -9,25 +9,10 @@ export default function AddStage() {
   const dispatch = useDispatch();
 
   const [stage, setStage] = useState({
-    //stageId: "",
     name: "",
     location: "",
     capacity: "",
     type: "",
-    /*venue: {
-          venueId: 10,
-          name: "Suvilahti"
-        },
-        events:[
-          {
-            eventId: 45,
-            startDate: "2021-05-09",
-            startTime: "12:00:00",
-            endDate: "2021-05-09",
-            endTime: "13:00:00",
-            title: "Art Business"
-          }
-        ]*/
   });
 
   const [show, setShow] = useState(false);
@@ -40,7 +25,6 @@ export default function AddStage() {
   };
 
   const handleAdd = () => {
-    console.log(stage);
     dispatch(addStage(stage));
     handleClose();
   };

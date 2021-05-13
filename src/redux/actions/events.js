@@ -89,10 +89,21 @@ export const deleteEvent = (id) => {
     }
 };
 
-export const addEvent = (event) => {
+export const addEvent = (event, presenter, stage) => {
     try {
         return async dispatch => {
-            await axios.post(`${EVENTS_URL}`, {"event": event})
+            await axios.post(`${EVENTS_URL}`,
+            {"event": event,
+            "linkEventStage": {
+              "operation": "CREATE",
+              "destinationId": stage
+            },
+            "linkEventPresenters": [
+              {
+                "operation": "CREATE",
+                "destinationId": presenter
+              }
+            ]})
                 .then(response => {
                     dispatch({
                         type: ADD_EVENT,

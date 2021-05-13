@@ -3,7 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getPresenters, addPresenter } from '../redux/actions/presenters';
+import { getPresenters, } from '../redux/actions/presenters';
 import EditPresenter from "./presenters/editPresenter";
 import AddPresenter from "./presenters/addPresenter";
 import DeletePresenter from "./presenters/deletePresenter";
@@ -14,12 +14,10 @@ function Presenters() {
   const presenters = useSelector(state => state.presenterReducer.presenters)
   const dispatch = useDispatch();
   const fetchPresenters = () => dispatch(getPresenters());
-  const addOnePresenter = (presenter) => dispatch(addPresenter(presenter));
 
   useEffect(() => {
     const fetchData = async () => {
         fetchPresenters()
-        addOnePresenter()
     } 
     fetchData()
   }, []) 
@@ -43,7 +41,7 @@ function Presenters() {
     return  (
       <div style={{marginLeft: '150px'}}>
         <h3>Hosts</h3>
-        <AddPresenter addPresenter={addOnePresenter} />
+        <AddPresenter />
           <div style ={{height: "700px", width: "95%", margin: "auto"}}>
                 <AgGridReact 
                     ref = {gridRef}

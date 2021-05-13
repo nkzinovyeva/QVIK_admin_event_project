@@ -73,9 +73,7 @@ export default function AddRestaurant() {
                 required
               />
               <Form.Text muted>
-                The title must be no more than 30 characters long. Choose a
-                short and succinct name that accurately reflects the essence
-                of the event.
+                The title must be no more than 30 characters long.
                   </Form.Text>
               <Form.Control.Feedback type="invalid">
                 This field can't be empty.
@@ -127,6 +125,7 @@ export default function AddRestaurant() {
                   This field can't be empty.
                     </Form.Control.Feedback>
               </Form.Group>
+              </Form.Row>
               <Form.Group>
                 <Form.Label> Short Description: </Form.Label>
                 <Form.Control
@@ -140,7 +139,7 @@ export default function AddRestaurant() {
                 />
                 <Form.Text muted>
                   Short description must be no more than 120 characters long.
-                  Describe the event in a few words, choosing succinct and precise expressions.
+                  Describe the restaurant in a few words, choosing succinct and precise expressions.
                 </Form.Text>
                 <Form.Control.Feedback type="invalid">
                   This field can't be empty.
@@ -149,6 +148,9 @@ export default function AddRestaurant() {
               <Form.Group>
                 <Form.Label> Full Description: </Form.Label>
                 <Form.Control
+                  as="textarea"
+                  rows={3}
+                  size="sm"
                   type="text"
                   name="fullDescription"
                   value={restaurant.fullDescription}
@@ -160,7 +162,6 @@ export default function AddRestaurant() {
                   This field can't be empty.
                 </Form.Control.Feedback>
               </Form.Group>
-            </Form.Row>
             <Button type="submit"> Add </Button>{" "}
             <Button variant="outline-secondary" onClick={handleClose}>
               Cancel
