@@ -51,13 +51,13 @@ export const editEvent = (event, id, presenter, stage) => {
             "linkEventStage": {
               "operation": "CREATE",
               "sourceId": id,
-              "destinationId": presenter
+              "destinationId": stage
             },
             "linkEventPresenters": [
               {
                 "operation": "CREATE",
                 "sourceId": id,
-                "destinationId": stage
+                "destinationId": presenter
               }
             ]})
                 .then(response => {
