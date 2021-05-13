@@ -45,15 +45,16 @@ export default function EditEvent(props) {
   }
 
   const handleEdit = () => {
-    dispatch(editEvent(event, event.eventId))
-    dispatch(linkEventPresenter(event.eventId, presenter.presenterId))
-    dispatch(linkEventStage(event.eventId, stage.stageId ))
+    dispatch(editEvent(event, event.eventId, presenter, stage))
+    //dispatch(linkEventPresenter(event.eventId, presenter.presenterId))
+    //dispatch(linkEventStage(event.eventId, stage.stageId ))
     handleClose();
   }
   
   const handleStageChange = e => {
     setStage(e.target.value);
   };
+
   const handlePresenterChange = e => {
     setPresenter(e.target.value);
   };
@@ -71,14 +72,6 @@ export default function EditEvent(props) {
     }
     setValidated(true);
   };
-
-  const handleAddPresenter = () => {
-    dispatch(linkEventPresenter(event.eventId, presenter.presenterId))
-  }
-
-  const handleAddStage = () => {
-    dispatch(linkEventStage(event.eventId, stage.stageId))
-  }
 
   const fromDate = useState(props.event.startDate);
 
@@ -254,13 +247,6 @@ export default function EditEvent(props) {
                   <Form.Control.Feedback type="invalid">
                     This field can't be empty.
                   </Form.Control.Feedback>
-                  <Button
-                    variant="outline-secondary"
-                    size="sm"
-                    onClick={handleAddStage}
-                  >
-                    Save
-                  </Button>
                 </Form.Group>
               </Form.Row>
               <Form.Row>
@@ -296,13 +282,6 @@ export default function EditEvent(props) {
                   <Form.Control.Feedback type="invalid">
                     This field can't be empty.
                   </Form.Control.Feedback>
-                  <Button
-                    variant="outline-secondary"
-                    size="sm"
-                    onClick={handleAddPresenter}
-                  >
-                    Save
-                  </Button>
                 </Form.Group>
               </Form.Row>
               <Button type="submit"> Update </Button>{" "}

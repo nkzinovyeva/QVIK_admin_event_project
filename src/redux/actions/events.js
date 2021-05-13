@@ -42,11 +42,24 @@ export const getEvents = () => {
       }
 };
 
-export const editEvent = (event, id) => {
+export const editEvent = (event, id, presenter, stage) => {
     let url = `${EVENTS_URL}`+'/' + id;
     try {
         return async dispatch => {
-            await axios.put(url, event)
+            await axios.put(url, 
+            {"event": event,
+            "linkEventStage": {
+              "operation": "CREATE",
+              "sourceId": id,
+              "destinationId": presenter
+            },
+            "linkEventPresenters": [
+              {
+                "operation": "CREATE",
+                "sourceId": id,
+                "destinationId": stage
+              }
+            ]})
                 .then(response => {
                     dispatch({
                         type: EDIT_EVENT,
@@ -79,7 +92,7 @@ export const deleteEvent = (id) => {
 export const addEvent = (event) => {
     try {
         return async dispatch => {
-            await axios.post(`${EVENTS_URL}`, event)
+            await axios.post(`${EVENTS_URL}`, {"event": event})
                 .then(response => {
                     dispatch({
                         type: ADD_EVENT,
