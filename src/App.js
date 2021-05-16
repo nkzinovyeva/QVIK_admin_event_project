@@ -125,13 +125,10 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-  // necessary for content to be below app bar
   toolbar: {
     minHeight: 10,
     backgroundColor: "#EEEEEE",
   },
-  //toolbar: theme.mixins.toolbar,
-
   drawerPaper: {
     width: drawerWidth,
   },
