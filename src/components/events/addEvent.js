@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStages } from '../../redux/actions/stages';
 import { getPresenters } from '../../redux/actions/presenters';
 import { addEvent } from '../../redux/actions/events';
+import "../../App.css"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -83,6 +84,9 @@ export default function AddEvent(props) {
           aria-labelledby="contained-modal-title-vcenter"
           show={show}
           onHide={handleClose}
+          centered
+          backdrop="static"
+          keyboard={false}
         >
           <Modal.Header>
             <Modal.Title>Add new sub-event : </Modal.Title>
@@ -190,6 +194,9 @@ export default function AddEvent(props) {
               <Form.Group>
                 <Form.Label> Full Description: </Form.Label>
                 <Form.Control
+                  as="textarea"
+                  rows={3}
+                  size="sm"
                   type="text"
                   name="fullDescription"
                   value={event.fullDescription}
@@ -212,7 +219,8 @@ export default function AddEvent(props) {
                         label="stage"
                         required  
                         >
-                            {stagesList.map(stage=><option value={stage.stageId}>{stage.name}</option>)}
+                          <option value={presenter.presenterId}>Not selected</option>
+                          {stagesList.map(stage=><option value={stage.stageId}>{stage.name}</option>)}
                     </Form.Control>
                 <Form.Control.Feedback type="invalid">
                   This field can't be empty.
@@ -229,6 +237,7 @@ export default function AddEvent(props) {
                         label="presenter"
                         required  
                         >
+                        <option value={presenter.presenterId}>Not selected</option>
                         {presentersList.map(presenter=><option value={presenter.presenterId}>{presenter.name}</option>)} 
                     </Form.Control>
                 <Form.Control.Feedback type="invalid">

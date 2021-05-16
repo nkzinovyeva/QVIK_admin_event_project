@@ -1,6 +1,5 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
@@ -16,6 +15,7 @@ import PageRestaurants from "./components/Restaurants";
 import PageStages from "./components/Stages";
 import PagePresenters from "./components/Presenters";
 import AppMenu from "./menu/AppMenu";
+import "./App.css"
 
 function App(props) {
   const { window } = props;
@@ -35,7 +35,6 @@ function App(props) {
   return (
     <BrowserRouter>
       <div className={classes.root}>
-        <CssBaseline />
         <AppBar position="fixed" color="transparent" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <IconButton
@@ -128,9 +127,11 @@ const useStyles = makeStyles((theme) => ({
   },
   // necessary for content to be below app bar
   toolbar: {
-    minHeight: 50,
+    minHeight: 10,
     backgroundColor: "#EEEEEE",
   },
+  //toolbar: theme.mixins.toolbar,
+
   drawerPaper: {
     width: drawerWidth,
   },
@@ -141,7 +142,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#EEEEEE",
   },
   container: {
-    paddingTop: theme.spacing(8),
+    paddingTop: theme.spacing(7),
     paddingBottom: theme.spacing(4),
   },
   title: {

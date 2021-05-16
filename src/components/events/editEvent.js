@@ -231,6 +231,7 @@ export default function EditEvent(props) {
                     label="stage"
                     required
                   >
+                    <option value={presenter.presenterId}>Not selected</option>
                     {stagesList.map((stage) => (
                       <option value={stage.stageId}>{stage.name}</option>
                     ))}
@@ -263,7 +264,7 @@ export default function EditEvent(props) {
                     onChange={handlePresenterChange}
                     label="presenter"
                     required
-                  >
+                  ><option value={presenter.presenterId}>Not selected</option>
                     {presentersList.map((presenter) => (
                       <option value={presenter.presenterId}>
                         {presenter.name}
