@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Form, Button, Col } from 'react-bootstrap';
 import { useSelector } from "react-redux";
 
+
 export function Event() {
 
   const mainEvent = useSelector(state => state.eventReducer.mainEvent)
