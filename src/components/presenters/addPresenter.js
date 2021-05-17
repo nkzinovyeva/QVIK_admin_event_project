@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Modal, Form, Col, Button } from "react-bootstrap";
+import { Modal, Form } from "react-bootstrap";
+import Button from "@material-ui/core/Button";
 import { useDispatch } from "react-redux";
 import { addPresenter } from "../../redux/actions/presenters";
 
@@ -44,9 +45,10 @@ export default function AddPresenter() {
 
   return (
     <>
-      <Button variant="outline-primary" onClick={handleShow}>
-        Add Host
+      <Button onClick={handleShow} size="small" color="primary">
+        ADD PRESENTER +
       </Button>
+
       <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -54,7 +56,7 @@ export default function AddPresenter() {
         onHide={handleClose}
       >
         <Modal.Header>
-          <Modal.Title>Add host: </Modal.Title>
+          <Modal.Title>Add presenter's info: </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit} noValidate validated={validated}>
@@ -132,8 +134,21 @@ export default function AddPresenter() {
                 This field can't be empty.
               </Form.Control.Feedback>
             </Form.Group>
-            <Button type="submit"> Add </Button>{" "}
-            <Button variant="outline-secondary" onClick={handleClose}>
+            <Button
+              type="submit"
+              variant="outlined"
+              color="primary"
+              size="small"
+            >
+              {" "}
+              Add{" "}
+            </Button>{" "}
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={handleClose}
+            >
               Cancel
             </Button>
           </Form>

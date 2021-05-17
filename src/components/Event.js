@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Form, Button, Col } from 'react-bootstrap';
 import { useSelector } from "react-redux";
-import { getMainEvent } from '../redux/actions/events';
 
 export function Event() {
 
@@ -38,9 +37,8 @@ export function Event() {
 
 
   return (
-    <div>
+    <div marginBottom="30">
       <Form onSubmit={handleSubmit} noValidate validated={validated}>
-        <Button variant="outline-primary"> Update Main Event </Button>
         <Form.Group>
           <Form.Label> Title: </Form.Label>
           <Form.Control
@@ -52,6 +50,7 @@ export function Event() {
             onChange={handleInputChange}
             maxLength={30}
             required
+            disabled
           />
           <Form.Text muted>
             The title must be no more than 30 characters long. Choose a short
@@ -72,6 +71,7 @@ export function Event() {
               value={mainEvent.startDate}
               onChange={handleInputChange}
               required
+              disabled
             />
             <Form.Control.Feedback type="invalid">
               This field can't be empty.
@@ -87,6 +87,7 @@ export function Event() {
               label="start Time"
               onChange={handleInputChange}
               required
+              disabled
             />
             <Form.Control.Feedback type="invalid">
               This field can't be empty.
@@ -104,6 +105,7 @@ export function Event() {
               value={mainEvent.endDate}
               onChange={handleInputChange}
               required
+              disabled
             />
             <Form.Control.Feedback type="invalid">
               This field can't be empty.
@@ -119,6 +121,7 @@ export function Event() {
               label="end Time"
               onChange={handleInputChange}
               required
+              disabled
             />
             <Form.Control.Feedback type="invalid">
               This field can't be empty.
@@ -147,6 +150,7 @@ export function Event() {
                 <div key={index} className="mb-3" style={{ marginLeft: 20 }}>
                   <Form.Check
                     disabled
+                    checked
                     type="checkbox"
                     label={tag}
                   />

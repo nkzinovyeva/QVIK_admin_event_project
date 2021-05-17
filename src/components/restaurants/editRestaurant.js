@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, Form, Col, Button, } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { Modal, Form, Col } from "react-bootstrap";
+import Button from "@material-ui/core/Button";
 import { useDispatch } from "react-redux";
-import { editRestaurant } from '../../redux/actions/restaurants';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { editRestaurant } from "../../redux/actions/restaurants";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function EditRestaurant(props) {
-    
   const [restaurant, setRestaurant] = useState({});
   const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ export default function EditRestaurant(props) {
       openTime: props.rest.openTime,
       closeTime: props.rest.closeTime,
       shortDescription: props.rest.shortDescription,
-      fullDescription: props.rest.fullDescription
+      fullDescription: props.rest.fullDescription,
     });
   }, []);
 
@@ -27,13 +27,13 @@ export default function EditRestaurant(props) {
   const handleShow = () => setShow(true);
 
   const handleInputChange = (e) => {
-    setRestaurant({ ...restaurant, [e.target.name]: e.target.value })
-  }
+    setRestaurant({ ...restaurant, [e.target.name]: e.target.value });
+  };
 
   const handleEdit = () => {
-    dispatch(editRestaurant(restaurant, restaurant.restaurantId))
+    dispatch(editRestaurant(restaurant, restaurant.restaurantId));
     handleClose();
-  }
+  };
 
   const [validated, setValidated] = useState(false);
 
@@ -43,7 +43,7 @@ export default function EditRestaurant(props) {
       e.preventDefault();
       e.stopPropagation();
     } else {
-      console.log('Im here')
+      console.log("Im here");
       handleEdit();
     }
     setValidated(true);
@@ -51,9 +51,9 @@ export default function EditRestaurant(props) {
 
   return (
     <>
-      <Button variant="link" onClick={handleShow}>
-        Edit
-        </Button>
+      <Button onClick={handleShow} size="small" color="primary">
+        EDIT
+      </Button>
 
       <Modal
         size="lg"
@@ -80,12 +80,12 @@ export default function EditRestaurant(props) {
               />
               <Form.Text muted>
                 The title must be no more than 30 characters long. Choose a
-                short and succinct name that accurately reflects the essence
-                of the event.
-                </Form.Text>
+                short and succinct name that accurately reflects the essence of
+                the event.
+              </Form.Text>
               <Form.Control.Feedback type="invalid">
                 This field can't be empty.
-                </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label> Location: </Form.Label>
@@ -101,12 +101,12 @@ export default function EditRestaurant(props) {
               />
               <Form.Text muted>
                 Short description must be no more than 120 characters long.
-                Describe the event in a few words, choosing succinct and
-                precise expressions.
-                </Form.Text>
+                Describe the event in a few words, choosing succinct and precise
+                expressions.
+              </Form.Text>
               <Form.Control.Feedback type="invalid">
                 This field can't be empty.
-                </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label> Short Description: </Form.Label>
@@ -122,12 +122,12 @@ export default function EditRestaurant(props) {
               />
               <Form.Text muted>
                 Short description must be no more than 120 characters long.
-                Describe the event in a few words, choosing succinct and
-                precise expressions.
-                </Form.Text>
+                Describe the event in a few words, choosing succinct and precise
+                expressions.
+              </Form.Text>
               <Form.Control.Feedback type="invalid">
                 This field can't be empty.
-                </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label> Full Description: </Form.Label>
@@ -144,7 +144,7 @@ export default function EditRestaurant(props) {
               />
               <Form.Control.Feedback type="invalid">
                 This field can't be empty.
-                </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Row>
               <Form.Group as={Col}>
@@ -160,7 +160,7 @@ export default function EditRestaurant(props) {
                 />
                 <Form.Control.Feedback type="invalid">
                   This field can't be empty.
-                  </Form.Control.Feedback>
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col}>
                 <Form.Label> Close Time: </Form.Label>
@@ -175,16 +175,29 @@ export default function EditRestaurant(props) {
                 />
                 <Form.Control.Feedback type="invalid">
                   This field can't be empty.
-                  </Form.Control.Feedback>
+                </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
-            <Button type="submit"> Update </Button>{" "}
-            <Button variant="outline-secondary" onClick={handleClose}>
+            <Button
+              type="submit"
+              variant="outlined"
+              color="primary"
+              size="small"
+            >
+              {" "}
+              Update{" "}
+            </Button>{" "}
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={handleClose}
+            >
               Cancel
-              </Button>
+            </Button>
           </Form>
         </Modal.Body>
       </Modal>
     </>
   );
-};
+}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Modal, Form, Col, Button } from "react-bootstrap";
+import { Modal, Form, Col } from "react-bootstrap";
+import Button from "@material-ui/core/Button";
 import { useDispatch } from "react-redux";
 import { addStage } from "../../redux/actions/stages";
 
@@ -45,8 +46,8 @@ export default function AddStage() {
 
   return (
     <>
-      <Button variant="outline-primary" onClick={handleShow}>
-        Add Stage
+      <Button onClick={handleShow} size="small" color="primary">
+        ADD NEW +
       </Button>
       <Modal
         size="lg"
@@ -139,8 +140,21 @@ export default function AddStage() {
                 </Form.Control.Feedback>
               </Form.Group>
             </Form.Row>
-            <Button type="submit"> Add </Button>{" "}
-            <Button variant="outline-secondary" onClick={handleClose}>
+            <Button
+              type="submit"
+              variant="outlined"
+              color="primary"
+              size="small"
+            >
+              {" "}
+              Add{" "}
+            </Button>{" "}
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={handleClose}
+            >
               Cancel
             </Button>
           </Form>

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, Form, Col, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { Modal, Form, Col } from "react-bootstrap";
+import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { addRestaurant } from '../../redux/actions/restaurants';
+import { addRestaurant } from "../../redux/actions/restaurants";
 
 export default function AddRestaurant() {
   const dispatch = useDispatch();
@@ -22,13 +23,13 @@ export default function AddRestaurant() {
   const handleShow = () => setShow(true);
 
   const handleInputChange = (e) => {
-    setRestaurant({ ...restaurant, [e.target.name]: e.target.value })
+    setRestaurant({ ...restaurant, [e.target.name]: e.target.value });
   };
   const handleAdd = () => {
     console.log(restaurant);
-    dispatch(addRestaurant(restaurant))
+    dispatch(addRestaurant(restaurant));
     handleClose();
-  }
+  };
 
   const [validated, setValidated] = useState(false);
 
@@ -46,9 +47,9 @@ export default function AddRestaurant() {
 
   return (
     <>
-      <Button variant="outline-primary" onClick={handleShow}>
-        Add Restaurant
-          </Button>
+      <Button onClick={handleShow} size="small" color="primary">
+        ADD NEW +
+      </Button>
       <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -74,10 +75,10 @@ export default function AddRestaurant() {
               />
               <Form.Text muted>
                 The title must be no more than 30 characters long.
-                  </Form.Text>
+              </Form.Text>
               <Form.Control.Feedback type="invalid">
                 This field can't be empty.
-                  </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label> Location: </Form.Label>
@@ -93,7 +94,7 @@ export default function AddRestaurant() {
               />
               <Form.Control.Feedback type="invalid">
                 This field can't be empty.
-                  </Form.Control.Feedback>
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Row>
               <Form.Group as={Col}>
@@ -108,7 +109,7 @@ export default function AddRestaurant() {
                 />
                 <Form.Control.Feedback type="invalid">
                   This field can't be empty.
-                    </Form.Control.Feedback>
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col}>
                 <Form.Label> Close Time: </Form.Label>
@@ -123,49 +124,63 @@ export default function AddRestaurant() {
 
                 <Form.Control.Feedback type="invalid">
                   This field can't be empty.
-                    </Form.Control.Feedback>
-              </Form.Group>
-              </Form.Row>
-              <Form.Group>
-                <Form.Label> Short Description: </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="shortDescription"
-                  value={restaurant.shortDescription}
-                  onChange={handleInputChange}
-                  label="short Description"
-                  maxLength={120}
-                  required
-                />
-                <Form.Text muted>
-                  Short description must be no more than 120 characters long.
-                  Describe the restaurant in a few words, choosing succinct and precise expressions.
-                </Form.Text>
-                <Form.Control.Feedback type="invalid">
-                  This field can't be empty.
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group>
-                <Form.Label> Full Description: </Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  size="sm"
-                  type="text"
-                  name="fullDescription"
-                  value={restaurant.fullDescription}
-                  onChange={handleInputChange}
-                  label="full Description"
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  This field can't be empty.
-                </Form.Control.Feedback>
-              </Form.Group>
-            <Button type="submit"> Add </Button>{" "}
-            <Button variant="outline-secondary" onClick={handleClose}>
+            </Form.Row>
+            <Form.Group>
+              <Form.Label> Short Description: </Form.Label>
+              <Form.Control
+                type="text"
+                name="shortDescription"
+                value={restaurant.shortDescription}
+                onChange={handleInputChange}
+                label="short Description"
+                maxLength={120}
+                required
+              />
+              <Form.Text muted>
+                Short description must be no more than 120 characters long.
+                Describe the restaurant in a few words, choosing succinct and
+                precise expressions.
+              </Form.Text>
+              <Form.Control.Feedback type="invalid">
+                This field can't be empty.
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label> Full Description: </Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                size="sm"
+                type="text"
+                name="fullDescription"
+                value={restaurant.fullDescription}
+                onChange={handleInputChange}
+                label="full Description"
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                This field can't be empty.
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Button
+              type="submit"
+              variant="outlined"
+              color="primary"
+              size="small"
+            >
+              {" "}
+              Add{" "}
+            </Button>{" "}
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={handleClose}
+            >
               Cancel
-                </Button>
+            </Button>
           </Form>
         </Modal.Body>
       </Modal>

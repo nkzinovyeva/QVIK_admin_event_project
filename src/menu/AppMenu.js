@@ -35,7 +35,7 @@ const AppMenu = (props) => {
       name: 'Restaurants',
       link: '/restaurants',
       items: restaurants.map(restaurant => {
-        return { name: restaurant.name, type: 'rest' }
+        return { name: restaurant.name, type: 'rest', data: restaurant }
       })
     },
     {

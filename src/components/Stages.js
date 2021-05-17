@@ -1,65 +1,82 @@
-import React, { useEffect, useRef } from "react";
-import { AgGridReact } from "ag-grid-react";
-import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-material.css";
+import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Grid,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  Divider,
+} from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { getStages } from '../redux/actions/stages';
+import { getStages } from "../redux/actions/stages";
 import EditStage from "./stages/editStage";
 import AddStage from "./stages/addStage";
 import DeleteStage from "./stages/deleteStage";
 
 function Stages() {
-
-  const gridRef = useRef();
-  const stages = useSelector(state => state.stageReducer.stages)
+  const classes = useStyles();
+  const stages = useSelector((state) => state.stageReducer.stages);
   const dispatch = useDispatch();
   const fetchStages = () => dispatch(getStages());
 
   useEffect(() => {
     const fetchData = async () => {
-      fetchStages()
-    } 
-    fetchData()
-  }, []) 
+      fetchStages();
+    };
+    fetchData();
+  }, []);
 
-
-  //set columns for the table
-  const columns = [
-      {headerName: "Name", field: "name", sortable: true, filter: true, resizable: true },
-      //{headerName: "Location", field: "location", sortable: true, filter: true, resizable: true },
-      //{headerName: "Capacity", field: "capacity", sortable: true, filter: true, resizable: true },
-      {headerName: "", 
-          field: "", 
-          cellRendererFramework: (params, index) => <EditStage key={index} stage={params.data} /> 
-      },
-      {headerName: "", 
-          field: "", 
-          cellRendererFramework: params => <DeleteStage stage={params.data} />
-      }
-  ];
-
-    return  (
-      <div >
-        <h3>Stages</h3>
-        <AddStage />
-          <div style ={{height: "700px", width: "95%" , margin: "auto"}}>
-                <AgGridReact 
-                    ref = {gridRef}
-                    onGridReady = { params => {
-                        gridRef.current = params.api;
-                        params.api.sizeColumnsToFit();
-                        params.api.refreshCells()
-                    }}
-                    columnDefs = {columns}
-                    suppressCellSelection = {true}
-                    rowData = {stages}
-                    pagination = {true}
-                    paginationPageSize = {10}
-                >
-                </AgGridReact>
-            </div>
+  return (
+    <div>
+      <h3>STAGES</h3>
+      <div className={classes.container}>
+        <Grid container justify="space-between">
+          <Grid item>
+            <Typography variant="h7">STAGES</Typography>
+          </Grid>
+          <Grid item>
+            <AddStage />
+          </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <div className={classes.list}>
+            <List dense={true}>
+              {stages.map((item, index) => (
+                <div>
+                  <ListItem key={index}>
+                    <ListItemText
+                      primary={`${index + 1}. stage `}
+                      secondary={item.name}
+                    />
+                    <ListItemSecondaryAction>
+                      <EditStage stage={item} />
+                      <DeleteStage stage={item} />
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <Divider component="li" />
+                </div>
+              ))}
+            </List>
+          </div>
+        </Grid>
       </div>
-      )
-    }
+    </div>
+  );
+}
 
 export default Stages;
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    flexGrow: 1,
+    maxWidth: 500,
+  },
+  list: {
+    backgroundColor: theme.palette.background.paper,
+  },
+  title: {
+    margin: theme.spacing(4, 0, 2),
+  },
+}));

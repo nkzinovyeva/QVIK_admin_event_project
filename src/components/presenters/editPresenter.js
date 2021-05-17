@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Form, Button } from "react-bootstrap";
+import { Modal, Form } from "react-bootstrap";
+import Button from "@material-ui/core/Button";
 import { useDispatch } from "react-redux";
 import { editPresenter } from "../../redux/actions/presenters";
 
@@ -49,8 +50,8 @@ export default function EditStage(props) {
 
   return (
     <>
-      <Button variant="link" onClick={handleShow}>
-        Edit
+      <Button onClick={handleShow} size="small" color="primary">
+        EDIT
       </Button>
 
       <Modal
@@ -138,8 +139,21 @@ export default function EditStage(props) {
                 This field can't be empty.
               </Form.Control.Feedback>
             </Form.Group>
-            <Button type="submit"> Update </Button>{" "}
-            <Button variant="outline-secondary" onClick={handleClose}>
+            <Button
+              type="submit"
+              variant="outlined"
+              color="primary"
+              size="small"
+            >
+              {" "}
+              Update{" "}
+            </Button>{" "}
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={handleClose}
+            >
               Cancel
             </Button>
           </Form>

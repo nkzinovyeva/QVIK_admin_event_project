@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Modal, Form, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Modal, Form } from "react-bootstrap";
+import Button from "@material-ui/core/Button";
 import { useDispatch } from "react-redux";
-import { deleteRestaurant } from '../../redux/actions/restaurants';
+import { deleteRestaurant } from "../../redux/actions/restaurants";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const DeleteRestaurant = (props) => {
   const dispatch = useDispatch();
@@ -20,8 +21,8 @@ const DeleteRestaurant = (props) => {
 
   return (
     <>
-      <Button variant="link" onClick={handleShow}>
-        Delete
+      <Button onClick={handleShow} size="small" color="primary">
+        DELETE
       </Button>
 
       <Modal
@@ -37,8 +38,21 @@ const DeleteRestaurant = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Form onSubmit={handleDelete}>
-            <Button type="submit"> Confirm </Button>{" "}
-            <Button variant="outline-secondary" onClick={handleClose}>
+            <Button
+              type="submit"
+              variant="outlined"
+              color="primary"
+              size="small"
+            >
+              {" "}
+              Confirm{" "}
+            </Button>{" "}
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={handleClose}
+            >
               Cancel
             </Button>
           </Form>

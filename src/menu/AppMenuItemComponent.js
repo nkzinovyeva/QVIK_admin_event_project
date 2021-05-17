@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import EditEvent from "../components/events/editEvent";
 import EditStage from "../components/stages/editStage";
 import EditPresenter from "../components/presenters/editPresenter";
+import EditRestaurant from "../components/restaurants/editRestaurant";
 
 const AppMenuItemComponent = (props) => {
   const { className, onClick, link, children, type, data } = props;
@@ -37,6 +38,9 @@ const AppMenuItemComponent = (props) => {
     return (
       <ListItem button className={className} onClick={onClick}>
         <ListItemText children={children} />
+        <ListItemIcon>
+          <EditRestaurant rest={data} />
+        </ListItemIcon>
       </ListItem>
     );
   }
