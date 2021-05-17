@@ -7,7 +7,7 @@ import { editEvent } from "../../redux/actions/events";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function EditEvent(props) {
-  
+
   const stagesList = useSelector((state) => state.stageReducer.stages);
   const presentersList = useSelector(
     (state) => state.presenterReducer.presenters
@@ -26,7 +26,7 @@ export default function EditEvent(props) {
       shortDescription: props.event.shortDescription,
       fullDescription: props.event.fullDescription,
       stage: props.event.stage.name,
-      active: props.event.stage.name,
+      //active: props.event.stage.name,
       //mainEvent: props.event.mainEvent
     });
   }, []);

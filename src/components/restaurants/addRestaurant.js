@@ -57,7 +57,7 @@ export default function AddRestaurant() {
         onHide={handleClose}
       >
         <Modal.Header>
-          <Modal.Title>Add stage: </Modal.Title>
+          <Modal.Title>Add restaurant: </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit} noValidate validated={validated}>
