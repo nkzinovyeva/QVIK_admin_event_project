@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStages } from '../../redux/actions/stages';
 import { getPresenters } from '../../redux/actions/presenters';
 import { addEvent } from '../../redux/actions/events';
-import "../../App.css"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
