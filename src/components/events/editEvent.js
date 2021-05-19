@@ -26,7 +26,7 @@ export default function EditEvent(props) {
       shortDescription: props.event.shortDescription,
       fullDescription: props.event.fullDescription,
       stage: props.event.stage.name,
-      //active: props.event.stage.name,
+      active: props.event.avtive,
       //mainEvent: props.event.mainEvent
     });
   }, []);
