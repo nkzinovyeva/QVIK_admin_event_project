@@ -34,7 +34,7 @@ function Stages() {
       <div className={classes.container}>
         <Grid container justify="space-between">
           <Grid item>
-            <Typography variant="h7">STAGES</Typography>
+            <Typography variant="h6">STAGES</Typography>
           </Grid>
           <Grid item>
             <AddStage />
@@ -44,7 +44,7 @@ function Stages() {
           <div className={classes.list}>
             <List dense={true}>
               {stages.map((item, index) => (
-                <div>
+                <div >
                   <ListItem key={index}>
                     <ListItemText
                       primary={`${index + 1}. stage `}

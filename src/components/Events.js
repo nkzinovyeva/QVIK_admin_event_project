@@ -27,24 +27,21 @@ function Events() {
   const fetchMainEvent = () => dispatch(getMainEvent());
 
   useEffect(() => {
-    const fetchData = async () => {
-      fetchMainEvent();
-      fetchEvents();
-    };
-    fetchData();
+    fetchMainEvent();
+    fetchEvents();
   }, []);
 
 
   return (
     <div>
       <h3>Events</h3>
-      <EditMainEvent event={mainEvent}/>
-      <Event event={mainEvent} />
+      <EditMainEvent event={mainEvent} />
+      <Event />
       <h4>CREATE SUB-EVENTS</h4>
       <div className={classes.container}>
         <Grid container justify="space-between">
           <Grid item>
-            <Typography variant="h7">Sub-events</Typography>
+            <Typography variant="h6">Sub-events</Typography>
           </Grid>
           <Grid item>
             <AddEvent />
@@ -54,8 +51,8 @@ function Events() {
           <div className={classes.list}>
             <List dense={true}>
               {events.map((item, index) => (
-                <div>
-                  <ListItem key={index}>
+                <div >
+                  <ListItem key={index} >
                     <ListItemText
                       primary={`${index + 1}. sub-event `}
                       secondary={item.title}
@@ -65,7 +62,7 @@ function Events() {
                       <DeleteEvent event={item} />
                     </ListItemSecondaryAction>
                   </ListItem>
-                  <Divider component="li" />
+                  <Divider component="li"/>
                 </div>
               ))}
             </List>

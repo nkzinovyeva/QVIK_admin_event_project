@@ -35,7 +35,7 @@ function Restaurants() {
       <div className={classes.container}>
         <Grid container justify="space-between">
           <Grid item>
-            <Typography variant="h7">RESTAURANTS</Typography>
+            <Typography variant="h6">RESTAURANTS</Typography>
           </Grid>
           <Grid item>
             <AddRestaurant />

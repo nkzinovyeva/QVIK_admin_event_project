@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Form, Col } from "react-bootstrap";
 import Button from "@material-ui/core/Button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { editEvent } from "../../redux/actions/events";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function EditMainEvent(props) {
-  
+
   const [event, setEvent] = useState({});
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ export default function EditMainEvent(props) {
       endDate: props.event.endDate,
       endTime: props.event.endTime,
       title: props.event.title,
-      mainEvent: props.event.mainEvent
+      //mainEvent: props.event.mainEvent
     });
   }, []);
 
@@ -64,7 +64,7 @@ export default function EditMainEvent(props) {
         onHide={handleClose}
       >
         <Modal.Header>
-          <Modal.Title>Edit Main Event info: </Modal.Title>
+          <Modal.Title>Edit Main Event info:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit} noValidate validated={validated}>

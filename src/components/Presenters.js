@@ -34,7 +34,7 @@ function Presenters() {
       <div className={classes.container}>
         <Grid container justify="space-between">
           <Grid item>
-            <Typography variant="h7">PRESENTERS</Typography>
+            <Typography variant="h6">PRESENTERS</Typography>
           </Grid>
           <Grid item>
             <AddPresenter />
@@ -44,7 +44,7 @@ function Presenters() {
           <div className={classes.list}>
             <List dense={true}>
               {presenters.map((item, index) => (
-                <div>
+                <div >
                   <ListItem key={index}>
                     <ListItemText
                       primary={`${index + 1}. presenter `}

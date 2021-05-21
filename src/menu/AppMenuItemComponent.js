@@ -25,7 +25,7 @@ const AppMenuItemComponent = (props) => {
 
   if (type === "event") {
     return (
-      <ListItem button className={className} onClick={onClick}>
+      <ListItem button className={className} onClick={onClick} key={data.eventId}>
         <ListItemText children={children} />
         <ListItemIcon>
           <EditEvent event={data} />
@@ -36,7 +36,7 @@ const AppMenuItemComponent = (props) => {
 
   if (type === "rest") {
     return (
-      <ListItem button className={className} onClick={onClick}>
+      <ListItem button className={className} onClick={onClick} key={data.restaurantId}>
         <ListItemText children={children} />
         <ListItemIcon>
           <EditRestaurant rest={data} />
@@ -47,7 +47,7 @@ const AppMenuItemComponent = (props) => {
 
   if (type === "stage") {
     return (
-      <ListItem button className={className} onClick={onClick}>
+      <ListItem button className={className} onClick={onClick} key={data.stageId}>
         <ListItemText children={children} />
         <ListItemIcon>
           <EditStage stage={data} />
@@ -58,7 +58,7 @@ const AppMenuItemComponent = (props) => {
 
   if (type === "presenter") {
     return (
-      <ListItem button className={className} onClick={onClick}>
+      <ListItem button className={className} onClick={onClick} key={data.presentertId}>
         <ListItemText children={children} />
         <ListItemIcon>
           <EditPresenter presenter={data} />

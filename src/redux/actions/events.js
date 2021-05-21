@@ -9,7 +9,6 @@ import {
     try {
         return async dispatch => {
           const response = await axios.get(`${SETUP_URL}`);
-          console.log('initial', response.data.data )
           if (response.data) {
             dispatch({
               type: GET_MAIN_EVENT,

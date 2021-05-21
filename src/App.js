@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 import Drawer from "@material-ui/core/Drawer";
@@ -15,6 +15,8 @@ import PageRestaurants from "./components/Restaurants";
 import PageStages from "./components/Stages";
 import PagePresenters from "./components/Presenters";
 import AppMenu from "./menu/AppMenu";
+import { useDispatch } from "react-redux";
+import { getMainEvent } from "./redux/actions/events";
 import "./App.css"
 
 function App(props) {
@@ -23,6 +25,12 @@ function App(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [open, setOpen] = React.useState(true);
+  const fetchMainEvent = () => dispatch(getMainEvent());
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchMainEvent()
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

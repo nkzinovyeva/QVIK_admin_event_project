@@ -38,7 +38,7 @@ export function Event() {
 
 
   return (
-    <div marginBottom="30">
+    <div>
       <Form onSubmit={handleSubmit} noValidate validated={validated}>
         <Form.Group>
           <Form.Label> Title: </Form.Label>
